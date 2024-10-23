@@ -62,7 +62,7 @@ importers:
   moose-directive:
     dependencies:
       '@mooses/drag':
-        specifier: ^0.0.1
+        specifier: ^0.0.2
         version: link:../moose-drag
 
   moose-drag: {}
