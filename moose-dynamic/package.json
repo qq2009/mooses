@@ -1,0 +1,9 @@
+{
+    "name": "@mooses/dynamic",
+    "type": "module",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "vue": "^3.4.19"
+    }
+}

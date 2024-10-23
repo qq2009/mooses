@@ -1,0 +1,19 @@
+{
+    "name": "@mooses/drag",
+    "type": "module",
+    "version": "0.0.2",
+    "description": "拖拽，支持边界限制、吸附、栅格对齐、速度控制及拖拽回调",
+    "main": "index.js",
+    "author": "Gsothing",
+    "keywords": [
+        "拖拽",
+        "吸附",
+        "边界限制",
+        "栅格对齐"
+    ],
+    "license": "ISC",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

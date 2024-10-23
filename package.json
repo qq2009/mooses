@@ -1,0 +1,23 @@
+{
+    "name": "moose",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+        "dev-example": "pnpm run -C example dev"
+    },
+    "dependencies": {
+        "@mooses/drag": "workspace:^",
+        "@mooses/dynamic": "workspace:^",
+        "@mooses/event": "workspace:^",
+        "@mooses/form": "workspace:^",
+        "@mooses/table": "workspace:^",
+        "@mooses/utils": "workspace:^",
+        "@mooses/theme": "workspace:^",
+        "@mooses/directive": "workspace:^"
+    },
+    "devDependencies": {
+        "prettier": "^3.0.3"
+    },
+    "license": "ISC"
+}

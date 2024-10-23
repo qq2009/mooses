@@ -1,0 +1,34 @@
+import { createRouter, createWebHashHistory } from 'vue-router';
+
+/**
+ * @type {import('vue-router').RouteRecordRaw[]}
+ * */
+const routes = [
+    {
+        path: '/',
+        name: 'Home',
+        component: () => import('@/views/home/index.vue'),
+    },
+    {
+        path: '/table',
+        name: 'Table',
+        component: () => import('@/views/table/index.vue'),
+    },
+    {
+        path: '/form',
+        name: 'Form',
+        component: () => import('@/views/form/index.vue'),
+    },
+    {
+        path: '/drag',
+        name: 'drag',
+        component: () => import('@/views/drag/index.vue'),
+    },
+];
+
+export const router = createRouter({
+    history: createWebHashHistory(),
+    routes,
+});
+
+export default router;

@@ -1,0 +1,10 @@
+packages:
+  - 'example/**'
+  - 'moose-drag/**'
+  - 'moose-dynamic/**'
+  - 'moose-event/**'
+  - 'moose-form/**'
+  - 'moose-table/**'
+  - 'moose-utils/**'
+  - 'moose-theme/**'
+  - 'moose-directive/**'

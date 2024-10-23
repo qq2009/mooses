@@ -1,0 +1,16 @@
+{
+    "name": "@mooses/theme",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "开发常用样式",
+    "author": "Gsothing",
+    "keywords": [
+        "重置样式",
+        "网格"
+    ],
+    "license": "ISC",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}
