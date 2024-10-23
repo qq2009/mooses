@@ -10,7 +10,7 @@ const optionsD1 = {
     // 设置初始位置
     initialPosition: { top: 50, left: 50 },
     // 指定手柄
-    handle: 'handle',
+    handle: '.handle',
     // 拖拽方向
     direction: 'horizontal',
     onStart: () => console.log('开始拖拽'),
@@ -24,7 +24,7 @@ const optionsD2 = {
     // 设置初始位置
     initialPosition: { top: 50, left: 300 },
     // 指定手柄
-    handle: 'handle',
+    handle: '.handle',
     // 拖拽方向
     direction: 'vertical',
     onStart: () => console.log('开始拖拽'),

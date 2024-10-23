@@ -9,7 +9,7 @@ const options = {
     // 设置初始位置
     initialPosition: { top: 0, left: 0 },
     // 指定手柄
-    handle: 'handle',
+    handle: '.handle',
     enableGridSnap: true,
     gridSize: 60,
     onStart: () => console.log('开始拖拽'),

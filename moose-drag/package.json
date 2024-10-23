@@ -1,7 +1,7 @@
 {
     "name": "@mooses/drag",
     "type": "module",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "拖拽，支持边界限制、吸附、栅格对齐、速度控制及拖拽回调",
     "main": "index.js",
     "author": "Gsothing",

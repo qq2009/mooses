@@ -10,7 +10,7 @@ const optionsC = {
     // 设置初始位置
     initialPosition: { top: 50, left: 50 },
     // 指定手柄
-    handle: 'handle',
+    handle: '.handle',
     onStart: () => console.log('开始拖拽'),
     onMove: () => console.log('拖动中...'),
     onEnd: () => console.log('拖动结束！'),

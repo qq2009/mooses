@@ -10,7 +10,7 @@ const optionsE = {
     // 设置初始位置
     initialPosition: { top: 50, left: 300 },
     // 指定手柄
-    handle: 'handle',
+    handle: '.handle',
     // 启用边界吸附
     snapToBoundary: true,
     onStart: () => console.log('开始拖拽'),

@@ -1,5 +1,7 @@
 # enableDrag 函数使用文档
 
+[在线例子](https://qq2009.github.io/mooses/#/drag)
+
 ## 概述
 
 enableDrag 是一个为标签元素添加拖拽功能的函数。
