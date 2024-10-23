@@ -29,6 +29,11 @@ const routes = [
         name: 'emitter',
         component: () => import('@/views/emitter/index.vue'),
     },
+    {
+        path: '/dynamic',
+        name: 'dynamic',
+        component: () => import('@/views/dynamic/index.vue'),
+    },
 ];
 
 export const router = createRouter({

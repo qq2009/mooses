@@ -15,6 +15,11 @@ const list = ref([
         docs: '支持事件监听、触发、一次性监听、优先级、错误处理和事件日志功能',
         path: '/emitter',
     },
+    {
+        name: 'dynamic',
+        docs: '',
+        path: '/dynamic',
+    },
 ]);
 
 function handle(path) {
