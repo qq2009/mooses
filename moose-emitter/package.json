@@ -1,15 +1,12 @@
 {
-    "name": "@mooses/directive",
+    "name": "@mooses/emitter",
     "type": "module",
-    "version": "0.0.6",
-    "description": "自定义命令",
+    "version": "0.0.1",
+    "description": "",
     "main": "index.js",
     "author": "Gsothing",
     "keywords": [],
     "license": "ISC",
-    "dependencies": {
-        "@mooses/drag": "^0.0.3"
-    },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",
         "access": "public"

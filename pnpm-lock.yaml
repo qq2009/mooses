@@ -17,9 +17,9 @@ importers:
       '@mooses/dynamic':
         specifier: workspace:^
         version: link:moose-dynamic
-      '@mooses/event':
+      '@mooses/emitter':
         specifier: workspace:^
-        version: link:moose-event
+        version: link:moose-emitter
       '@mooses/form':
         specifier: workspace:^
         version: link:moose-form
@@ -62,7 +62,7 @@ importers:
   moose-directive:
     dependencies:
       '@mooses/drag':
-        specifier: ^0.0.2
+        specifier: ^0.0.3
         version: link:../moose-drag
 
   moose-drag: {}
@@ -73,11 +73,7 @@ importers:
         specifier: ^3.4.19
         version: 3.5.12
 
-  moose-event:
-    dependencies:
-      vue:
-        specifier: ^3.4.19
-        version: 3.5.12
+  moose-emitter: {}
 
   moose-form:
     dependencies:

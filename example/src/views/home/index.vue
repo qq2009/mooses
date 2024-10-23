@@ -10,6 +10,11 @@ const list = ref([
         docs: '拖拽，支持边界限制、吸附、栅格对齐、速度控制及拖拽回调',
         path: '/drag',
     },
+    {
+        name: '事件管理器',
+        docs: '支持事件监听、触发、一次性监听、优先级、错误处理和事件日志功能',
+        path: '/emitter',
+    },
 ]);
 
 function handle(path) {

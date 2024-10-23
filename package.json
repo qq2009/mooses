@@ -9,7 +9,7 @@
     "dependencies": {
         "@mooses/drag": "workspace:^",
         "@mooses/dynamic": "workspace:^",
-        "@mooses/event": "workspace:^",
+        "@mooses/emitter": "workspace:^",
         "@mooses/form": "workspace:^",
         "@mooses/table": "workspace:^",
         "@mooses/utils": "workspace:^",

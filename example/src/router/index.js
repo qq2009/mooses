@@ -24,6 +24,11 @@ const routes = [
         name: 'drag',
         component: () => import('@/views/drag/index.vue'),
     },
+    {
+        path: '/emitter',
+        name: 'emitter',
+        component: () => import('@/views/emitter/index.vue'),
+    },
 ];
 
 export const router = createRouter({
