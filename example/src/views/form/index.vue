@@ -1,7 +1,18 @@
 <script setup>
-import { ElCard } from 'element-plus';
+import { ref } from 'vue';
+import { ElCard, ElButton } from 'element-plus';
 import { MForm } from '@mooses/form';
-import { columns } from './config';
+import { options } from './config';
+
+const formRef = ref(null);
+
+async function handle() {
+   const ret = await formRef.value.validate();
+   if (ret) {
+       console.log(ret);
+   }
+}
+
 </script>
 
 <template>
@@ -10,7 +21,11 @@ import { columns } from './config';
             <template #header>
                 <h2>基础用法</h2>
             </template>
-            <MForm :columns="columns" />
+            <MForm ref="formRef" :options="options" />
+
+            <div>
+                <ElButton @click="handle">提交</ElButton>
+            </div>
         </ElCard>
     </div>
 </template>

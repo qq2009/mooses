@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, defineEmits } from 'vue';
-import { ElFormItem, ElInput } from 'element-plus';
+import { ElFormItem, ElInputNumber } from 'element-plus';
 
 const props = defineProps({
     field: {
@@ -8,8 +8,8 @@ const props = defineProps({
         required: true,
     },
     defaultValue: {
-        type: String,
-        default: '',
+        type: Number,
+        default: 0,
     },
 });
 
@@ -21,8 +21,8 @@ watch(value, (val) => {
     handleUpdate(val);
 });
 
-function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+function handleUpdate(val) {
+    emits('update', { [props.field]: val || defaultValue });
 }
 
 handleUpdate();
@@ -30,7 +30,7 @@ handleUpdate();
 
 <template>
     <ElFormItem v-bind="$attrs">
-        <ElInput v-model="value" v-bind="$attrs" />
+        <ElInputNumber v-model="value" v-bind="$attrs" />
     </ElFormItem>
 </template>
 

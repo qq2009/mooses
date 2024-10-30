@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, defineEmits } from 'vue';
-import { ElFormItem, ElInput } from 'element-plus';
+import { ElFormItem, ElTimeSelect } from 'element-plus';
 
 const props = defineProps({
     field: {
@@ -22,7 +22,7 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+    emits('update', { [props.field]: val || defaultValue });
 }
 
 handleUpdate();
@@ -30,7 +30,7 @@ handleUpdate();
 
 <template>
     <ElFormItem v-bind="$attrs">
-        <ElInput v-model="value" v-bind="$attrs" />
+        <ElTimeSelect v-model="value" v-bind="$attrs" />
     </ElFormItem>
 </template>
 

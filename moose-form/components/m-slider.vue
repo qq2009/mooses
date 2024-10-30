@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, defineEmits } from 'vue';
-import { ElFormItem, ElInput } from 'element-plus';
+import { ElFormItem, ElSlider } from 'element-plus';
 
 const props = defineProps({
     field: {
@@ -8,8 +8,8 @@ const props = defineProps({
         required: true,
     },
     defaultValue: {
-        type: String,
-        default: '',
+        type: [Number, Object],
+        default: 0,
     },
 });
 
@@ -30,7 +30,7 @@ handleUpdate();
 
 <template>
     <ElFormItem v-bind="$attrs">
-        <ElInput v-model="value" v-bind="$attrs" />
+        <ElSlider v-model="value" v-bind="$attrs" />
     </ElFormItem>
 </template>
 
