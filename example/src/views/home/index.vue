@@ -20,6 +20,11 @@ const list = ref([
         docs: '',
         path: '/dynamic',
     },
+    {
+        name: '表单设计',
+        docs: '表单设计器',
+        path: '/form',
+    },
 ]);
 
 function handle(path) {
