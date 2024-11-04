@@ -5,7 +5,7 @@
     "description": "",
     "main": "index.js",
     "author": "Gsothing",
-    "keywords": [],
+    "keywords": ["事件"],
     "license": "ISC",
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",

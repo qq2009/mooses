@@ -8,3 +8,4 @@ packages:
   - 'moose-utils/**'
   - 'moose-theme/**'
   - 'moose-directive/**'
+  - 'moose-svg-editor/**'

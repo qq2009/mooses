@@ -34,6 +34,11 @@ const routes = [
         name: 'dynamic',
         component: () => import('@/views/dynamic/index.vue'),
     },
+    {
+        path: '/svg-editor',
+        name: 'svg-editor',
+        component: () => import('@/views/svg-editor/index.vue'),
+    },
 ];
 
 export const router = createRouter({

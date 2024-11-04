@@ -23,6 +23,9 @@ importers:
       '@mooses/form':
         specifier: workspace:^
         version: link:moose-form
+      '@mooses/svg-editor':
+        specifier: workspace:^
+        version: link:moose-svg-editor
       '@mooses/table':
         specifier: workspace:^
         version: link:moose-table
@@ -77,6 +80,27 @@ importers:
 
   moose-form:
     dependencies:
+      element-plus:
+        specifier: ^2.8.0
+        version: 2.8.5(vue@3.5.12)
+      vue:
+        specifier: ^3.4.19
+        version: 3.5.12
+
+  moose-svg-editor:
+    dependencies:
+      '@svgdotjs/svg.draggable.js':
+        specifier: ^3.0.4
+        version: 3.0.4(@svgdotjs/svg.js@3.2.4)
+      '@svgdotjs/svg.js':
+        specifier: ^3.2.4
+        version: 3.2.4
+      '@svgdotjs/svg.resize.js':
+        specifier: ^2.0.4
+        version: 2.0.4(@svgdotjs/svg.js@3.2.4)(@svgdotjs/svg.select.js@4.0.1)
+      '@svgdotjs/svg.select.js':
+        specifier: ^4.0.1
+        version: 4.0.1(@svgdotjs/svg.js@3.2.4)
       element-plus:
         specifier: ^2.8.0
         version: 2.8.5(vue@3.5.12)
@@ -620,6 +644,38 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@svgdotjs/svg.draggable.js@3.0.4(@svgdotjs/svg.js@3.2.4):
+    resolution: {integrity: sha512-vWi/Col5Szo74HJVBgMHz23kLVljt3jvngmh0DzST45iO2ubIZ487uUAHIxSZH2tVRyiaaTL+Phaasgp4gUD2g==}
+    peerDependencies:
+      '@svgdotjs/svg.js': ^3.2.4
+    dependencies:
+      '@svgdotjs/svg.js': 3.2.4
+    dev: false
+
+  /@svgdotjs/svg.js@3.2.4:
+    resolution: {integrity: sha512-BjJ/7vWNowlX3Z8O4ywT58DqbNRyYlkk6Yz/D13aB7hGmfQTvGX4Tkgtm/ApYlu9M7lCQi15xUEidqMUmdMYwg==}
+    dev: false
+
+  /@svgdotjs/svg.resize.js@2.0.4(@svgdotjs/svg.js@3.2.4)(@svgdotjs/svg.select.js@4.0.1):
+    resolution: {integrity: sha512-TRzYv0xh/eF7dOsse/asi/Bn+O8vvNRPlVUvYwTje2lKpGvT65ncXuqNWDNnhxJKlp5NcgMxfM5VMKL8c1WNTQ==}
+    engines: {node: '>= 14.18'}
+    peerDependencies:
+      '@svgdotjs/svg.js': ^3.2.4
+      '@svgdotjs/svg.select.js': ^4.0.1
+    dependencies:
+      '@svgdotjs/svg.js': 3.2.4
+      '@svgdotjs/svg.select.js': 4.0.1(@svgdotjs/svg.js@3.2.4)
+    dev: false
+
+  /@svgdotjs/svg.select.js@4.0.1(@svgdotjs/svg.js@3.2.4):
+    resolution: {integrity: sha512-pDFEDN7M6gBXYcx09anniVvI1f08W9UQCVMAt3tUalyL42sbdIP5vVefX0wBY68J1zVtp+F70zIP1mhVTwkedQ==}
+    engines: {node: '>= 14.18'}
+    peerDependencies:
+      '@svgdotjs/svg.js': ^3.2.4
+    dependencies:
+      '@svgdotjs/svg.js': 3.2.4
+    dev: false
 
   /@sxzz/popperjs-es@2.11.7:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}

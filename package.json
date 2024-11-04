@@ -14,7 +14,8 @@
         "@mooses/table": "workspace:^",
         "@mooses/utils": "workspace:^",
         "@mooses/theme": "workspace:^",
-        "@mooses/directive": "workspace:^"
+        "@mooses/directive": "workspace:^",
+        "@mooses/svg-editor": "workspace:^"
     },
     "devDependencies": {
         "prettier": "^3.0.3"

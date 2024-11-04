@@ -1,0 +1,25 @@
+{
+    "name": "@mooses/svg-editor",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "svg 编辑器",
+    "main": "index.js",
+    "author": "Gsothing",
+    "keywords": [
+        "svg",
+        "editor"
+    ],
+    "license": "ISC",
+    "dependencies": {
+        "@svgdotjs/svg.draggable.js": "^3.0.4",
+        "@svgdotjs/svg.js": "^3.2.4",
+        "@svgdotjs/svg.resize.js": "^2.0.4",
+        "@svgdotjs/svg.select.js": "^4.0.1",
+        "element-plus": "^2.8.0",
+        "vue": "^3.4.19"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}
