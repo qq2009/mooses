@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, nextTick, computed } from 'vue';
+import { ref, watch, onMounted, nextTick } from 'vue';
 import { canvasWrapper } from '../store/canvas-wrapper';
 import { SVG } from '@svgdotjs/svg.js';
 
@@ -26,6 +26,7 @@ let offsetY = 0;
 function computedOffset() {
     const scaledWidth = canvasWrapper.width * 1.5;
     const scaledHeight = canvasWrapper.height * 1.5;
+
     offsetX = (scaledWidth - canvasWrapper.width) / 2;
     offsetY = (scaledHeight - canvasWrapper.height) / 2;
 }
@@ -70,7 +71,7 @@ function drawRulerX() {
 
         if (i % (50 * zoomLevel.value) === 0) {
             svgX.text(label)
-                .move(i + offsetX + 2, 10)
+                .move(i + offsetX + 2, 8)
                 .font({ size: 8 });
         }
     }
@@ -85,7 +86,9 @@ function drawRulerY() {
 
     // 从 offsetY 偏移处开始绘制
     for (let i = -offsetY; i < rulerHeight - offsetY; i += spacing) {
+
         const label = (i / zoomLevel.value).toFixed(0);
+
         svgY.line(0, i + offsetY, 10, i + offsetY).stroke({
             color: '#000',
             width: 1,
@@ -93,7 +96,7 @@ function drawRulerY() {
 
         if (i % (50 * zoomLevel.value) === 0) {
             svgY.text(label)
-                .move(10, i + offsetY + 2)
+                .move(8, i + offsetY + 2)
                 .font({ size: 8 })
                 .rotate(90);
         }

@@ -18,10 +18,7 @@ const props = defineProps({
     },
 });
 
-const sizes = [
-    { label: '800*600' },
-    { label: '1920*1080' },
-];
+const sizes = [{ label: '800*600' }, { label: '1920*1080' }];
 
 const attr = reactive({
     fill: '',
@@ -57,7 +54,7 @@ watch(
 
 <template>
     <div class="background-panel">
-        <h2>画板设计</h2>
+        <h2 class="m-svg-attr-title">画板设计</h2>
 
         <ElForm :model="attr" label-position="left" label-width="auto">
             <ElFormItem label="背景颜色">

@@ -25,6 +25,7 @@ export class BackgroundDrawer {
             emitter.emit(EVENT_TYPE.SELECT_ELEMENT, {
                 type: 'background-panel',
                 target: {
+                    id: rect.id(),
                     getFill() {
                         return rect.fill();
                     },

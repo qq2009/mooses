@@ -16,18 +16,23 @@ emitter.on(EVENT_TYPE.SELECT_ELEMENT, handleElementSelection);
 
 <template>
     <div class="m-svg-attr">
-        <component
-            :is="dll[selectedElementType]"
-            :target="selectedElementData"
-        />
+        <template v-if="selectedElementData !== null">
+            <component
+                :is="dll[selectedElementType]"
+                :target="selectedElementData"
+                :key="selectedElementData.id"
+            />
+        </template>
     </div>
 </template>
 
 <style scoped>
 .m-svg-attr {
-    width: 18vw;
-    padding: 10px;
-    border-left: 1px solid #e5e5e5;
-    background-color: #ffffff;
+    flex: 1;
+}
+</style>
+<style>
+.m-svg-attr-title {
+    font-size: 18px;
 }
 </style>

@@ -47,6 +47,12 @@ export class TableDrawer {
 
         tableGroup.draggable();
 
+        emitter.emit(EVENT_TYPE.ELEMENT_CREATED, {
+            id: tableGroup.id(),
+            label: '表格',
+            el: tableGroup,
+        });
+
         const emitSelectEvent = () => {
             emitter.emit(EVENT_TYPE.SELECT_ELEMENT, {
                 type: 'table-panel',

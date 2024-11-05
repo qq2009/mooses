@@ -1,17 +1,22 @@
 <script setup>
 import Toolbar from './toolbar/index.vue';
-import CanvasWrapper from "./canvas-wrapper/index.vue"
+import CanvasWrapper from './canvas-wrapper/index.vue';
 import SvgCanvas from './svg-canvas/index.vue';
 import PropertiesPanel from './properties-panel/index.vue';
-
+import LayerManager from './layer-manager/index.vue';
 </script>
 <template>
     <div class="m-svg-editor">
         <Toolbar />
+
         <CanvasWrapper>
             <SvgCanvas />
         </CanvasWrapper>
-        <PropertiesPanel />
+
+        <div class="m-svg-side-panel">
+            <PropertiesPanel />
+            <LayerManager />
+        </div>
     </div>
 </template>
 <style scoped>
@@ -19,6 +24,15 @@ import PropertiesPanel from './properties-panel/index.vue';
     height: 100%;
     width: 100%;
     display: flex;
+}
+
+.m-svg-side-panel {
+    display: flex;
+    flex-direction: column;
+    width: 18vw;
+    padding: 10px;
+    border-left: 1px solid #e5e5e5;
+    background-color: #ffffff;
 }
 </style>
 
