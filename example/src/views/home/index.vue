@@ -25,6 +25,11 @@ const list = ref([
         docs: '表单设计器',
         path: '/form',
     },
+    {
+        name: 'svg-editor',
+        docs: 'svg 编辑器',
+        path: '/svg-editor',
+    },
 ]);
 
 function handle(path) {
