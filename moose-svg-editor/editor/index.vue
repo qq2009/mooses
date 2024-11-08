@@ -1,6 +1,17 @@
 <script setup>
-import { defineProps, markRaw, defineExpose, defineEmits } from 'vue';
+import {
+    defineProps,
+    markRaw,
+    defineExpose,
+    defineEmits,
+    onUnmounted,
+} from 'vue';
 import { setCanvas } from './hooks/canvas';
+import {
+    resetCanvasWrapper,
+    updateCanvasWrapper,
+} from './store/canvas-wrapper';
+import { resetLayers, generateAST } from './store/layer-manager';
 import Toolbar from './view/toolbar/index.vue';
 import CanvasWrapper from './view/canvas-wrapper/index.vue';
 import SvgCanvas from './view/svg-canvas/index.vue';
@@ -26,10 +37,24 @@ canvas.emitter.on(canvas.emitter_type.DRAG_DROP, (options) =>
     emits('dragDrop', options),
 );
 
+canvas.emitter.on(
+    canvas.emitter_type.UPDATE_CANVAS_WRAPPER,
+    ({ width, height }) => updateCanvasWrapper(width, height),
+);
+
 defineExpose({
     saveCanvasText() {
         return canvas.saveCanvasText();
     },
+    render(astSting) {
+        canvas.render(astSting);
+    },
+    generateAST,
+});
+
+onUnmounted(() => {
+    resetCanvasWrapper();
+    resetLayers();
 });
 </script>
 <template>

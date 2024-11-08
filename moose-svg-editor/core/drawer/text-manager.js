@@ -39,13 +39,30 @@ export default class TextManager {
      * @param { Text } target
      * */
     createElementHandler(target) {
+        const ctx = this;
         const { canvas } = this;
         return {
             type: DRAWER_TYPE.TEXT_PANEL,
             label: '文字标签',
             id: target.id(),
+            el: target,
             target: {
                 isSelect: false,
+                setId(id) {
+                    target.id(id);
+                },
+                getX() {
+                    return target.ax();
+                },
+                setX(x) {
+                    target.ax(x);
+                },
+                getY() {
+                    return target.ay();
+                },
+                setY(y) {
+                    target.ay(y);
+                },
                 getFill() {
                     return target.fill();
                 },
@@ -57,7 +74,7 @@ export default class TextManager {
                 },
                 setText(newContent) {
                     target.text(newContent);
-                    updateSelectBox();
+                    ctx.updateSelectBox(target);
                 },
                 getSize() {
                     return target.font('size');
@@ -95,7 +112,7 @@ export default class TextManager {
                         target.resize(false);
                     }
                 },
-                select: null
+                select: null,
             },
         };
     }
@@ -113,7 +130,7 @@ export default class TextManager {
                 fill: options.color || '#000',
                 weight: options.weight || 'normal',
                 style: options.style || 'normal',
-                family: '宋体',
+                family: options.family || '宋体',
             });
 
         text.draggable();
@@ -141,7 +158,8 @@ export default class TextManager {
         text.on('dragstart', emitSelectEvent);
         text.on('click', emitSelectEvent);
 
-
         emitter.emit(EVENT_TYPE.ELEMENT_CREATED, handler);
+
+        return handler;
     }
 }

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue';
+import { ElSelect, ElOption } from 'element-plus';
 import { canvasWrapper } from '../../store/canvas-wrapper';
 import { SVG } from '@svgdotjs/svg.js';
 
@@ -24,8 +25,9 @@ let offsetY = 0;
 
 // 偏移计算
 function computedOffset() {
-    const scaledWidth = canvasWrapper.width * 1.5;
-    const scaledHeight = canvasWrapper.height * 1.5;
+    const { w, h } = getWH();
+    const scaledWidth = w * 1.5;
+    const scaledHeight = h * 1.5;
 
     offsetX = (scaledWidth - canvasWrapper.width) / 2;
     offsetY = (scaledHeight - canvasWrapper.height) / 2;
@@ -34,11 +36,12 @@ function computedOffset() {
 function centerCanvas() {
     const wrapper = workareaRef.value;
     if (wrapper) {
+        const { w, h } = getWH();
         const wrapperWidth = wrapper.clientWidth;
         const wrapperHeight = wrapper.clientHeight;
 
-        const canvasWidth = canvasWrapper.width * 1.5;
-        const canvasHeight = canvasWrapper.height * 1.5;
+        const canvasWidth = w * 1.5;
+        const canvasHeight = h * 1.5;
 
         wrapper.scrollLeft = (canvasWidth - wrapperWidth) / 2;
         wrapper.scrollTop = (canvasHeight - wrapperHeight) / 2;
@@ -56,10 +59,10 @@ let svgY = null;
 
 function drawRulerX() {
     svgX.clear();
-
+    const { w } = getWH();
     const minSpacing = 10;
     const spacing = Math.max(minSpacing, 10 * zoomLevel.value);
-    const rulerWidth = canvasWrapper.width * 2;
+    const rulerWidth = w * 2;
 
     // 从 offsetX 偏移处开始绘制
     for (let i = -offsetX; i < rulerWidth - offsetX; i += spacing) {
@@ -79,10 +82,10 @@ function drawRulerX() {
 
 function drawRulerY() {
     svgY.clear();
-
+    const { h } = getWH();
     const minSpacing = 10;
     const spacing = Math.max(minSpacing, 10 * zoomLevel.value);
-    const rulerHeight = canvasWrapper.height * 2;
+    const rulerHeight = h * 2;
 
     // 从 offsetY 偏移处开始绘制
     for (let i = -offsetY; i < rulerHeight - offsetY; i += spacing) {
@@ -109,14 +112,25 @@ function handleScroll() {
     svgY.attr({ style: `transform: translateY(${-scrollTop}px);` });
 }
 
+function getWH() {
+    const w = Math.max(canvasWrapper.minWrapperWidth, canvasWrapper.width);
+    const h = Math.max(canvasWrapper.minWrapperHeight, canvasWrapper.height);
+
+    return {
+        w,
+        h,
+    };
+}
+
 onMounted(() => {
     setTimeout(() => {
+        const { w, h } = getWH();
         svgX = SVG()
             .addTo(rulerXRef.value)
-            .size(canvasWrapper.width * 2, 20);
+            .size(w * 2, 20);
         svgY = SVG()
             .addTo(rulerYRef.value)
-            .size(20, canvasWrapper.height * 2);
+            .size(20, h * 2);
 
         computedOffset();
         drawRulerX();
@@ -130,13 +144,14 @@ watch(
     () => [canvasWrapper.width, canvasWrapper.height],
     () => {
         nextTick(() => {
+            const { w, h } = getWH();
             computedOffset();
             drawRulerX();
             drawRulerY();
             centerCanvas();
 
-            svgX.size(canvasWrapper.width * 2, 20);
-            svgY.size(20, canvasWrapper.height * 2);
+            svgX.size(w * 2, 20);
+            svgY.size(20, h * 2);
             handleScroll();
         });
     },
@@ -156,6 +171,11 @@ watch(zoomLevel, () => {
         <div ref="workareaRef" class="workarea" @scroll="handleScroll">
             <slot></slot>
         </div>
+        <!--        <ElSelect class="zoom_select" v-model="zoomLevel">-->
+        <!--            <ElOption label="90%" :value="0.9"></ElOption>-->
+        <!--            <ElOption label="100%" :value="1"></ElOption>-->
+        <!--            <ElOption label="300%" :value="3"></ElOption>-->
+        <!--        </ElSelect>-->
     </div>
 </template>
 
@@ -204,5 +224,12 @@ watch(zoomLevel, () => {
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     overflow: auto;
+}
+
+.zoom_select {
+    right: 0;
+    bottom: 0;
+    width: 120px;
+    position: absolute;
 }
 </style>

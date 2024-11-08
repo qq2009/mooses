@@ -29,7 +29,11 @@ export default class BackgroundRenderer {
             type: DRAWER_TYPE.BACKGROUND_PANEL,
             label: '背景',
             id: target.id(),
+            el: target,
             target: {
+                setId(id) {
+                    target.id(id);
+                },
                 getFill() {
                     return target.fill();
                 },
@@ -77,5 +81,7 @@ export default class BackgroundRenderer {
         rect.on('click', emitSelectEvent);
 
         emitter.emit(EVENT_TYPE.ELEMENT_CREATED, handler);
+
+        return handler;
     }
 }

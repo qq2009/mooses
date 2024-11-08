@@ -4,6 +4,7 @@ import { MSvgEditor } from '@mooses/svg-editor';
 import { ElTree, ElForm, ElFormItem, ElInput, ElButton } from 'element-plus';
 import { useDynamicDialogMethod } from '@/components/dynamic-dialog/components/config';
 
+const editorRef = ref(null);
 const dynamicDialog = useDynamicDialogMethod();
 
 const formData = ref({
@@ -70,6 +71,62 @@ function handleDragDrop(opt) {
     const { t, content } = JSON.parse(options);
     ctx.textManager.addText(x, y, content);
 }
+
+function handleRender() {
+    const astString = JSON.stringify([
+        {
+            id: 'SvgjsRect1000',
+            label: '背景',
+            type: 'background-panel',
+            attr: {
+                width: 380,
+                height: 400,
+                fill: '#ffffff',
+            },
+            children: [
+                {
+                    id: 'SvgjsText1001',
+                    label: '文字标签',
+                    type: 'text-panel',
+                    attr: {
+                        x: 91,
+                        y: 94.5,
+                        content: '文本标签',
+                        fontSize: 16,
+                        fill: '#cc2f2f',
+                        fontFamily: '宋体',
+                        fontWeight: 'normal',
+                        fontStyle: 'normal',
+                    },
+                    children: [],
+                },
+                {
+                    id: 'SvgjsText1002',
+                    label: '文字标签',
+                    type: 'text-panel',
+                    attr: {
+                        x: 155,
+                        y: 209.5,
+                        content: '文本标签',
+                        fontSize: 16,
+                        fill: '#000000',
+                        fontFamily: '宋体',
+                        fontWeight: 'normal',
+                        fontStyle: 'normal',
+                    },
+                    children: [],
+                },
+            ],
+        },
+    ]);
+
+    editorRef.value.render(astString);
+}
+
+function save() {
+    const ast = editorRef.value.generateAST();
+    console.log(ast);
+}
 </script>
 
 <template>
@@ -78,8 +135,9 @@ function handleDragDrop(opt) {
             <h2 class="head-title">信息发布</h2>
 
             <div class="head-btn">
+                <ElButton @click="handleRender">渲染</ElButton>
                 <ElButton>发布</ElButton>
-                <ElButton>保存</ElButton>
+                <ElButton @click="save">保存</ElButton>
                 <ElButton @click="() => dynamicDialog.close()">退出</ElButton>
             </div>
         </div>
@@ -118,7 +176,11 @@ function handleDragDrop(opt) {
                 <ElTree :data="data" :props="defaultProps" />
             </div>
 
-            <MSvgEditor :is-toolbar="false" @drag-drop="handleDragDrop" />
+            <MSvgEditor
+                ref="editorRef"
+                :is-toolbar="false"
+                @drag-drop="handleDragDrop"
+            />
         </div>
     </div>
 </template>

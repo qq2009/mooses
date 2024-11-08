@@ -1,25 +1,54 @@
 import { ref } from 'vue';
-import { emitter, EVENT_TYPE } from '../../core/emitter.js';
+
+const DRAWER_TYPE = {
+    TEXT_PANEL: 'text-panel',
+    BACKGROUND_PANEL: 'background-panel',
+};
+
 export const layers = ref([]);
 
-export const addLayer = (id, label, el) => {
-    const newLayer = {
-        id,
-        label,
-        elements: el,
-        children: [],
-    };
-    layers.value.push(newLayer);
-};
+export function resetLayers() {
+    layers.value = [];
+}
 
-export const removeLayer = (target) => {
-    const index = layers.value.findIndex((node) => node.id === target.id);
-    if (![undefined].includes(index)) {
-        target.elements.remove();
-        layers.value.splice(index, 1);
+export function generateAST(layout = layers.value) {
+    if (!Array.isArray(layout) || layout.length === 0) {
+        return [];
     }
-};
+    return layout.map((node) => {
+        const newNode = {
+            id: node.id,
+            label: node.label,
+            type: node.type,
+            attr: {},
+            children: [],
+        };
 
-emitter.on(EVENT_TYPE.ELEMENT_CREATED, ({ id, label, el }) =>
-    addLayer(id, label, el),
-);
+        if (node.type === DRAWER_TYPE.BACKGROUND_PANEL) {
+            Object.assign(newNode.attr, {
+                width: node.target.getWidth(),
+                height: node.target.getHeight(),
+                fill: node.target.getFill(),
+            });
+        }
+
+        if (node.type === DRAWER_TYPE.TEXT_PANEL) {
+            Object.assign(newNode.attr, {
+                x: node.target.getX(),
+                y: node.target.getY(),
+                content: node.target.getText(),
+                fontSize: node.target.getSize(),
+                fill: node.target.getFill(),
+                fontFamily: node.target.getFontFamily(),
+                fontWeight: node.target.getWeight(),
+                fontStyle: node.target.getFontStyle(),
+            });
+        }
+
+        if (node.children && Array.isArray(node.children)) {
+            newNode.children = generateAST(node.children);
+        }
+
+        return newNode;
+    });
+}

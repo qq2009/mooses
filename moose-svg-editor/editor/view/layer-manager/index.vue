@@ -2,12 +2,13 @@
 import { ref } from 'vue';
 import { ElTree, ElLink } from 'element-plus';
 import { useCanvas } from '../../hooks/canvas';
+import { layers, resetLayers } from '../../store/layer-manager';
 import { DRAWER_TYPE } from '../../../core/drawer/constant';
+
 /**
  * @type { Ref<ElTree> }
  * */
 const treeRef = ref(null);
-const layers = ref([]);
 const canvas = useCanvas();
 const currentKey = ref('');
 
@@ -16,12 +17,13 @@ const defaultProps = {
     label: 'label',
 };
 
-function addLayer({ id, label, type, target }) {
+function addLayer({ id, label, type, target, el }) {
     const newLayer = {
         id,
         label,
         type,
         target,
+        el,
         children: [],
     };
 
@@ -59,6 +61,8 @@ function handleCurrentChange(data) {
 
 canvas.emitter.on(canvas.emitter_type.ELEMENT_CREATED, addLayer);
 
+canvas.emitter.on(canvas.emitter_type.ELEMENT_CLEARED, resetLayers);
+
 canvas.emitter.on(canvas.emitter_type.SELECT_ELEMENT, handleElementSelection);
 </script>
 
@@ -72,6 +76,7 @@ canvas.emitter.on(canvas.emitter_type.SELECT_ELEMENT, handleElementSelection);
             default-expand-all
             :data="layers"
             :props="defaultProps"
+            :expand-on-click-node="false"
             @current-change="handleCurrentChange"
         >
             <template #default="{ node, data }">

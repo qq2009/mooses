@@ -11,9 +11,11 @@ const canvas = useCanvas();
 const canvasRef = ref(null);
 
 const style = computed(() => {
+    const w = Math.max(canvasWrapper.minWrapperWidth, canvasWrapper.width);
+    const h = Math.max(canvasWrapper.minWrapperHeight, canvasWrapper.height);
     return {
-        width: `${canvasWrapper.width * 1.5}px`,
-        height: `${canvasWrapper.height * 1.5}px`,
+        width: `${w * 1.5}px`,
+        height: `${h * 1.5}px`,
     };
 });
 

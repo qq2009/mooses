@@ -21,6 +21,8 @@ function createText() {
         <button @click="save">保存</button>
 
         <button @click="createText">加入文本</button>
+
+        <button @click="renderAst">渲染</button>
     </div>
 </template>
 <style scoped>

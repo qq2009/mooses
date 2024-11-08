@@ -33,7 +33,7 @@ export class Emitter {
     /**
      * 监听事件
      * @param { string } evts - 事件名
-     * @param {{el: Text, id: string, 文字}} callback - 回调函数
+     * @param {(function(): void)|*} callback - 回调函数
      * @param { boolean } [once=false] - 是否只监听一次
      * @param { number } [priority=0] - 优先级
      * @param { number } [times=Infinity] - 限制触发次数

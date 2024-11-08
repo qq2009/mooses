@@ -16,6 +16,12 @@ function handleElementSelection({ type, target, id }) {
 }
 
 canvas.emitter.on(canvas.emitter_type.SELECT_ELEMENT, handleElementSelection);
+
+canvas.emitter.on(canvas.emitter_type.ELEMENT_CLEARED, () => {
+    selectedElementType.value = '';
+    selectedElementKey.value = '';
+    selectedElementData.value = null;
+});
 </script>
 
 <template>

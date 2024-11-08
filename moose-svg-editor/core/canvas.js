@@ -1,6 +1,7 @@
 import { SVG } from '@svgdotjs/svg.js';
 import { Emitter } from '@mooses/emitter';
 import { EVENT_TYPE } from './emitter-type';
+import { DRAWER_TYPE } from './drawer/constant';
 import '@svgdotjs/svg.draggable.js';
 import '@svgdotjs/svg.select.js';
 import '@svgdotjs/svg.resize.js';
@@ -48,7 +49,6 @@ export class SVGCanvas {
         if (this.canvas) {
             // 清空画布中的所有元素
             this.canvas.clear();
-            this.backgroundRenderer.draw();
             this.emitter.emit(EVENT_TYPE.ELEMENT_CLEARED);
         }
     }
@@ -81,6 +81,72 @@ export class SVGCanvas {
             this.setupDragAndDrop();
         } else {
             console.error('SVGCanvas 需要一个有效的 DOM 元素来初始化画布。');
+        }
+    }
+
+    render(astString) {
+        const ast = JSON.parse(astString);
+        this.clearCanvas();
+        setTimeout(() => this.processAST(ast), 300);
+    }
+
+    processAST(ast) {
+        ast.forEach((node) => {
+            this.handleNode(node);
+            if (node.children && node.children.length > 0) {
+                this.processAST(node.children);
+            }
+        });
+    }
+
+    /**
+     * 处理单个节点
+     * @param {Object} node - AST 的单个节点
+     */
+    handleNode(node) {
+        const ctx = this;
+        // TODO: 渲染逻辑临时用先写到这里
+        switch (node.type) {
+            case DRAWER_TYPE.BACKGROUND_PANEL: {
+                const { fill, height, width } = node.attr;
+                const handle = this.backgroundRenderer.draw();
+                handle.target.setWidth(width);
+                handle.target.setHeight(height);
+                handle.target.setFill(fill);
+                handle.target.setId(node.id);
+                ctx.emitter.emit(EVENT_TYPE.UPDATE_CANVAS_WRAPPER, {
+                    width,
+                    height,
+                });
+                break;
+            }
+
+            case DRAWER_TYPE.TEXT_PANEL: {
+                const {
+                    x,
+                    y,
+                    content,
+                    fontSize,
+                    fill,
+                    fontFamily,
+                    fontWeight,
+                    fontStyle,
+                } = node.attr;
+
+                const handle = this.textManager.addText(x, y, content, {
+                    size: fontSize,
+                    color: fill,
+                    family: fontFamily,
+                    weight: fontWeight,
+                    style: fontStyle,
+                });
+                handle.target.setId(node.id);
+                break;
+            }
+            default: {
+                console.warn(`未知类型的节点: ${node.type}`);
+                break;
+            }
         }
     }
 

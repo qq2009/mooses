@@ -41,8 +41,10 @@ function handle(path) {
     <nav class="navbar bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="#">Navbar</a>
+            <h1 class="navbar-title">Mooses</h1>
         </div>
     </nav>
+
     <main>
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
@@ -75,11 +77,13 @@ function handle(path) {
                                     focusable="false"
                                 >
                                     <title>Placeholder</title>
+
                                     <rect
                                         width="100%"
                                         height="100%"
                                         fill="#55595c"
                                     ></rect>
+
                                     <text
                                         x="50%"
                                         y="50%"
@@ -112,4 +116,23 @@ function handle(path) {
     </footer>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.navbar {
+    padding: 0.75rem 0;
+    box-shadow:
+        0 0.5rem 1rem rgba(0, 0, 0, 0.15),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.15);
+    background-image: linear-gradient(rgba(#712cf9, 1), rgba(#712cf9, 0.95));
+
+    .navbar-title {
+        font-weight: 600;
+        color: #fff;
+    }
+
+    .container {
+        height: 40px;
+        display: flex;
+        align-items: center;
+    }
+}
+</style>
