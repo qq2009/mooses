@@ -1,44 +1,64 @@
 import { SVG } from '@svgdotjs/svg.js';
+import { Emitter } from '@mooses/emitter';
+import { EVENT_TYPE } from './emitter-type';
 import '@svgdotjs/svg.draggable.js';
 import '@svgdotjs/svg.select.js';
 import '@svgdotjs/svg.resize.js';
 
+import BackgroundRenderer from './drawer/background-renderer';
+import TextManager from './drawer/text-manager';
+
 export class SVGCanvas {
-    /**
-     * @type {SVGCanvas}
-     * */
-    static instance = null;
+    options = {
+        w: 800,
+        h: 600,
+    };
+
+    emitter = new Emitter();
+
+    emitter_type = EVENT_TYPE;
 
     /**
      * @type {Svg}
      * */
-    draw = null;
+    canvas = null;
+
+    /**
+     * @type {BackgroundRenderer}
+     * */
+    backgroundRenderer = null;
+
+    /**
+     * @type {TextManager}
+     * */
+    textManager = null;
 
     /**
      * SVGCanvas 类构造函数
-     * @param {HTMLElement} element - SVG 的容器元素
+     * @param { Object } options - 画布配置项
      */
-    constructor(element) {
-        // 如果已经存在实例，则返回该实例，避免重复创建
-        if (SVGCanvas.instance) {
-            return SVGCanvas.instance;
-        }
-
-        if (element) {
-            this.initSVG(element);
-            SVGCanvas.instance = this;
-        } else {
-            console.error('SVGCanvas 需要一个有效的 DOM 元素来初始化画布。');
-        }
+    constructor(options = {}) {
+        this.options = { ...this.options, ...options };
     }
 
     /**
      * 清空 SVG 画布内容
      */
     clearCanvas() {
-        if (this.draw) {
+        if (this.canvas) {
             // 清空画布中的所有元素
-            this.draw.clear();
+            this.canvas.clear();
+            this.backgroundRenderer.draw();
+            this.emitter.emit(EVENT_TYPE.ELEMENT_CLEARED);
+        }
+    }
+
+    /**
+     * 保存画布内容
+     */
+    saveCanvasText() {
+        if (this.canvas) {
+            return this.canvas.svg();
         }
     }
 
@@ -47,20 +67,35 @@ export class SVGCanvas {
      * @param {HTMLElement} element - SVG 的容器元素
      */
     initSVG(element) {
-        // 初始化 SVG 画布并设置视图框大小
-        this.draw = SVG().addTo(element).size(800, 600);
+        if (element) {
+            this.canvas = SVG();
+            const { w, h } = this.options;
+            this.canvas.addTo(element).size(w, h);
+            this.backgroundRenderer = new BackgroundRenderer(
+                this.canvas,
+                this.emitter,
+            );
+            this.textManager = new TextManager(this.canvas, this.emitter);
+            this.emitter.emit(EVENT_TYPE.INIT_SVGCANVAS);
+
+            this.setupDragAndDrop();
+        } else {
+            console.error('SVGCanvas 需要一个有效的 DOM 元素来初始化画布。');
+        }
     }
 
-    /**
-     * 静态方法，获取 SVGCanvas 实例
-     * @param {HTMLElement?} element - SVG 的容器元素
-     * @returns {SVGCanvas} SVGCanvas 的单例实例
-     */
-    static getInstance(element) {
-        // 如果实例不存在且提供了元素，则创建新的实例
-        if (!SVGCanvas.instance && element) {
-            SVGCanvas.instance = new SVGCanvas(element);
-        }
-        return SVGCanvas.instance;
+    setupDragAndDrop() {
+        const ctx = this;
+        ctx.canvas.on('dragover', (event) => {
+            event.preventDefault();
+        });
+        ctx.canvas.on('drop', (event) => {
+            event.preventDefault();
+            const { offsetX: x, offsetY: y } = event;
+            const options = event.dataTransfer.getData('options');
+            if (options) {
+                ctx.emitter.emit(EVENT_TYPE.DRAG_DROP, { ctx, x, y, options });
+            }
+        });
     }
 }

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue';
-import { canvasWrapper } from '../store/canvas-wrapper';
+import { canvasWrapper } from '../../store/canvas-wrapper';
 import { SVG } from '@svgdotjs/svg.js';
 
 /**
@@ -86,7 +86,6 @@ function drawRulerY() {
 
     // 从 offsetY 偏移处开始绘制
     for (let i = -offsetY; i < rulerHeight - offsetY; i += spacing) {
-
         const label = (i / zoomLevel.value).toFixed(0);
 
         svgY.line(0, i + offsetY, 10, i + offsetY).stroke({
@@ -111,17 +110,20 @@ function handleScroll() {
 }
 
 onMounted(() => {
-    svgX = SVG()
-        .addTo(rulerXRef.value)
-        .size(canvasWrapper.width * 2, 20);
-    svgY = SVG()
-        .addTo(rulerYRef.value)
-        .size(20, canvasWrapper.height * 2);
-    computedOffset();
-    drawRulerX();
-    drawRulerY();
-    centerCanvas();
-    handleScroll();
+    setTimeout(() => {
+        svgX = SVG()
+            .addTo(rulerXRef.value)
+            .size(canvasWrapper.width * 2, 20);
+        svgY = SVG()
+            .addTo(rulerYRef.value)
+            .size(20, canvasWrapper.height * 2);
+
+        computedOffset();
+        drawRulerX();
+        drawRulerY();
+        centerCanvas();
+        handleScroll();
+    }, 300);
 });
 
 watch(
@@ -172,6 +174,8 @@ watch(zoomLevel, () => {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
     background-color: #ececee;
+    pointer-events: none;
+    user-select: none;
 }
 
 .ruler_x {
@@ -181,6 +185,8 @@ watch(zoomLevel, () => {
     overflow: hidden;
     height: 20px;
     width: 100%;
+    pointer-events: none;
+    user-select: none;
 }
 
 .ruler_y {
@@ -190,6 +196,8 @@ watch(zoomLevel, () => {
     overflow: hidden;
     width: 20px;
     height: 100%;
+    pointer-events: none;
+    user-select: none;
 }
 
 .workarea {

@@ -9,6 +9,12 @@ import {
     ElSelect,
     ElOption,
 } from 'element-plus';
+import {
+    weightOptions,
+    styleOptions,
+    familyOptions,
+    sizeOptions,
+} from './config';
 
 const props = defineProps({
     /**
@@ -19,20 +25,6 @@ const props = defineProps({
         required: true,
     },
 });
-
-const weightOptions = ['normal', 'bold'];
-const styleOptions = ['normal', 'italic'];
-
-const familyOptions = [
-    {
-        value: '默认',
-        label: '',
-    },
-    {
-        value: '楷体',
-        label: '楷体',
-    },
-];
 
 const attr = reactive({
     content: '',
@@ -48,8 +40,16 @@ const { target } = props;
 attr.content = target.getText();
 attr.fontSize = target.getSize();
 attr.fill = target.getFill();
+attr.fontFamily = target.getFontFamily();
 attr.fontWeight = target.getWeight();
 attr.fontStyle = target.getFontStyle();
+
+function hasTemplateString(str) {
+    const regex = /^\$\{.*\}$/;
+    return regex.test(str);
+}
+
+const isTemplateString = hasTemplateString(attr.content);
 
 watch(
     () => attr.content,
@@ -86,6 +86,13 @@ watch(
     },
 );
 
+watch(
+    () => attr.fontFamily,
+    (val) => {
+        target.setFontFamily(`'${val}'`);
+    },
+);
+
 onUnmounted(() => {
     target.deselectAll();
 });
@@ -96,12 +103,15 @@ onUnmounted(() => {
         <h2 class="m-svg-attr-title">文字</h2>
 
         <ElForm :model="attr" label-position="left" label-width="auto">
-            <ElFormItem label="内容">
-                <ElInput
-                    v-model="attr.content"
-                    placeholder="请输入内容"
-                ></ElInput>
-            </ElFormItem>
+            <!--    TODO: 如果是模版字符串 不让修改        -->
+            <template v-if="!isTemplateString">
+                <ElFormItem label="内容">
+                    <ElInput
+                        v-model="attr.content"
+                        placeholder="请输入内容"
+                    ></ElInput>
+                </ElFormItem>
+            </template>
 
             <ElFormItem label="字体粗细">
                 <ElSegmented
@@ -118,15 +128,19 @@ onUnmounted(() => {
             </ElFormItem>
 
             <ElFormItem label="字体大小">
-                <ElInput
-                    v-model="attr.fontSize"
-                    placeholder="请输入字体大小"
-                ></ElInput>
+                <ElSelect v-model="attr.fontSize" placeholder="请选择字体大小">
+                    <ElOption
+                        v-for="(size, size_idx) in sizeOptions"
+                        :key="size_idx"
+                        :label="size"
+                        :value="size"
+                    />
+                </ElSelect>
             </ElFormItem>
 
             <ElFormItem label="文本字体">
                 <ElSelect v-model="attr.fontFamily" placeholder="请选择字体">
-                    <el-option
+                    <ElOption
                         v-for="(family, family_idx) in familyOptions"
                         :key="family_idx"
                         :label="family.label"
@@ -143,9 +157,3 @@ onUnmounted(() => {
 </template>
 
 <style scoped></style>
-
-<!--
-font-size 字体大小
-fill 文本颜色
-
--->

@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { emitter, EVENT_TYPE } from '../core/emitter';
+import { emitter, EVENT_TYPE } from '../../core/emitter.js';
 export const layers = ref([]);
 
 export const addLayer = (id, label, el) => {

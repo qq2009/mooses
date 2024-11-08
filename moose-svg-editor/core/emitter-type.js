@@ -1,0 +1,12 @@
+export const EVENT_TYPE = {
+    // 画布初始化完成
+    INIT_SVGCANVAS: 'INIT_SVGCANVAS',
+    // 元素选中
+    SELECT_ELEMENT: 'CANVAS:SELECT_ELEMENT',
+    // 元素创建
+    ELEMENT_CREATED: 'CANVAS:ELEMENT_CREATED',
+    // 元素清空
+    ELEMENT_CLEARED: 'CANVAS:ELEMENT_CLEARED',
+    // 拖动放置
+    DRAG_DROP: 'CANVAS:DRAG_DROP',
+};

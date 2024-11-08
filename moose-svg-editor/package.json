@@ -1,7 +1,7 @@
 {
     "name": "@mooses/svg-editor",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "svg 编辑器",
     "main": "index.js",
     "author": "Gsothing",
@@ -16,6 +16,7 @@
         "@svgdotjs/svg.resize.js": "^2.0.4",
         "@svgdotjs/svg.select.js": "^4.0.1",
         "element-plus": "^2.8.0",
+        "@mooses/emitter": "^0.0.1",
         "vue": "^3.4.19"
     },
     "publishConfig": {

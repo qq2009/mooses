@@ -1,13 +1,42 @@
 <script setup>
-import Toolbar from './toolbar/index.vue';
-import CanvasWrapper from './canvas-wrapper/index.vue';
-import SvgCanvas from './svg-canvas/index.vue';
-import PropertiesPanel from './properties-panel/index.vue';
-import LayerManager from './layer-manager/index.vue';
+import { defineProps, markRaw, defineExpose, defineEmits } from 'vue';
+import { setCanvas } from './hooks/canvas';
+import Toolbar from './view/toolbar/index.vue';
+import CanvasWrapper from './view/canvas-wrapper/index.vue';
+import SvgCanvas from './view/svg-canvas/index.vue';
+import PropertiesPanel from './view/properties-panel/index.vue';
+import LayerManager from './view/layer-manager/index.vue';
+
+import { SVGCanvas } from '../core/canvas';
+
+defineProps({
+    isToolbar: {
+        type: Boolean,
+        default: true,
+    },
+});
+
+const emits = defineEmits(['dragDrop']);
+
+const canvas = markRaw(new SVGCanvas());
+
+setCanvas(canvas);
+
+canvas.emitter.on(canvas.emitter_type.DRAG_DROP, (options) =>
+    emits('dragDrop', options),
+);
+
+defineExpose({
+    saveCanvasText() {
+        return canvas.saveCanvasText();
+    },
+});
 </script>
 <template>
     <div class="m-svg-editor">
-        <Toolbar />
+        <template v-if="isToolbar">
+            <Toolbar />
+        </template>
 
         <CanvasWrapper>
             <SvgCanvas />
@@ -23,6 +52,7 @@ import LayerManager from './layer-manager/index.vue';
 .m-svg-editor {
     height: 100%;
     width: 100%;
+    flex: 1;
     display: flex;
 }
 
@@ -30,7 +60,8 @@ import LayerManager from './layer-manager/index.vue';
     display: flex;
     flex-direction: column;
     width: 18vw;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-left: 1px solid #e5e5e5;
     background-color: #ffffff;
 }

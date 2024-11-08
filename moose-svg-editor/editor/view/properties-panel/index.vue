@@ -1,17 +1,21 @@
 <script setup>
 import { ref } from 'vue';
-import { emitter, EVENT_TYPE } from '../core/emitter';
+import { useCanvas } from '../../hooks/canvas';
 import { dll } from './config';
 
+const canvas = useCanvas();
+
 const selectedElementType = ref('');
+const selectedElementKey = ref('');
 const selectedElementData = ref(null);
 
-function handleElementSelection({ type, target }) {
+function handleElementSelection({ type, target, id }) {
     selectedElementType.value = type;
+    selectedElementKey.value = id;
     selectedElementData.value = target;
 }
 
-emitter.on(EVENT_TYPE.SELECT_ELEMENT, handleElementSelection);
+canvas.emitter.on(canvas.emitter_type.SELECT_ELEMENT, handleElementSelection);
 </script>
 
 <template>
@@ -20,7 +24,7 @@ emitter.on(EVENT_TYPE.SELECT_ELEMENT, handleElementSelection);
             <component
                 :is="dll[selectedElementType]"
                 :target="selectedElementData"
-                :key="selectedElementData.id"
+                :key="selectedElementKey"
             />
         </template>
     </div>

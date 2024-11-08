@@ -7,7 +7,7 @@ import {
     ElSelect,
     ElOption,
 } from 'element-plus';
-import { updateCanvasWrapper } from '../../store/canvas-wrapper';
+import { updateCanvasWrapper } from '../../../store/canvas-wrapper';
 const props = defineProps({
     /**
      * @type { Rect }

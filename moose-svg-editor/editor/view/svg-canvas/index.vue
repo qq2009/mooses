@@ -1,8 +1,10 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { canvasWrapper } from '../store/canvas-wrapper';
-import { SVGCanvas } from '../core/canvas';
-import { BackgroundDrawer } from '../core/drawer/background-drawer';
+import { canvasWrapper } from '../../store/canvas-wrapper';
+import { useCanvas } from '../../hooks/canvas';
+
+const canvas = useCanvas();
+
 /**
  * @type {Ref<HTMLDivElement>}
  * */
@@ -17,8 +19,8 @@ const style = computed(() => {
 
 onMounted(() => {
     if (canvasRef.value) {
-        new SVGCanvas(canvasRef.value);
-        BackgroundDrawer.draw();
+        canvas.initSVG(canvasRef.value);
+        canvas.backgroundRenderer.draw();
     }
 });
 </script>
