@@ -35,16 +35,16 @@ export default class RectManager {
                     target.id(id);
                 },
                 getX() {
-                    return target.ax();
+                    return target.cx();
                 },
                 setX(x) {
-                    target.ax(x);
+                    target.cx(x);
                 },
                 getY() {
-                    return target.ay();
+                    return target.cy();
                 },
                 setY(y) {
-                    target.ay(y);
+                    target.cy(y);
                 },
                 getFill() {
                     return target.fill();
