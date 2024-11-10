@@ -98,7 +98,7 @@ function handleDelayer(id) {
 function handleRender() {
     const astString = JSON.stringify([
         {
-            id: 'SvgjsRect1015',
+            id: 'SvgjsRect1001',
             label: '背景',
             type: 'background-panel',
             attr: {
@@ -108,7 +108,7 @@ function handleRender() {
             },
             children: [
                 {
-                    id: 'SvgjsLine1016',
+                    id: 'SvgjsLine1002',
                     label: '直线',
                     type: 'line-panel',
                     attr: {
@@ -122,12 +122,12 @@ function handleRender() {
                     children: [],
                 },
                 {
-                    id: 'SvgjsText1017',
+                    id: 'SvgjsText1003',
                     label: '文字标签',
                     type: 'text-panel',
                     attr: {
                         x: 203,
-                        y: 354,
+                        y: 379,
                         content: '文本标签',
                         fontSize: 16,
                         fill: '#000000',
@@ -138,18 +138,34 @@ function handleRender() {
                     children: [],
                 },
                 {
-                    id: 'SvgjsText1018',
+                    id: 'SvgjsText1004',
                     label: '文字标签',
                     type: 'text-panel',
                     attr: {
                         x: 420,
-                        y: 297,
+                        y: 322,
                         content: '文本标签',
                         fontSize: 16,
                         fill: '#000000',
                         fontFamily: '宋体',
                         fontWeight: 'normal',
                         fontStyle: 'normal',
+                    },
+                    children: [],
+                },
+                {
+                    id: 'SvgjsRect1005',
+                    label: '距形',
+                    type: 'rect-panel',
+                    attr: {
+                        fill: '#ffffff',
+                        width: 100,
+                        height: 50,
+                        color: '#000000',
+                        strokeWidth: 1,
+                        strokeDasharray: 0,
+                        x: 72,
+                        y: 59,
                     },
                     children: [],
                 },

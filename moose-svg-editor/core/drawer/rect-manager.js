@@ -35,16 +35,16 @@ export default class RectManager {
                     target.id(id);
                 },
                 getX() {
-                    return target.cx();
+                    return target.attr('x');
                 },
                 setX(x) {
-                    target.cx(x);
+                    target.attr('x', x);
                 },
                 getY() {
-                    return target.cy();
+                    return target.attr('y');
                 },
                 setY(y) {
-                    target.cy(y);
+                    target.attr('y', y);
                 },
                 getFill() {
                     return target.fill();
@@ -107,6 +107,7 @@ export default class RectManager {
      * 绘制背景
      */
     addRect(x, y, w, h, options = {}) {
+        debugger;
         const { canvas, emitter } = this;
 
         const rect = canvas
