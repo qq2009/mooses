@@ -41,7 +41,7 @@ function removeLayer({ id, target }) {
         treeRef.value.remove(node);
         target.deselectAll();
         target.remove();
-
+        canvas.emitter.emit(canvas.emitter_type.DELAYER, { id });
         if (currentKey.value === id) {
             const [node] = layers.value;
             node.target.select();

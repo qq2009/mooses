@@ -89,7 +89,7 @@ watch(
 watch(
     () => attr.fontFamily,
     (val) => {
-        target.setFontFamily(`'${val}'`);
+        target.setFontFamily(`${val}`);
     },
 );
 

@@ -55,6 +55,12 @@ const aa = {
         t: 'text',
         content: '文本标签',
     },
+    line: {
+        t: 'line',
+    },
+    rect: {
+        t: 'rect',
+    },
     table: {
         t: 'table',
         content: '${外来人员}',
@@ -69,31 +75,62 @@ function onDragStart(event, type) {
 function handleDragDrop(opt) {
     const { ctx, x, y, options } = opt;
     const { t, content } = JSON.parse(options);
-    ctx.textManager.addText(x, y, content);
+    switch (t) {
+        case 'text': {
+            ctx.textManager.addText(x, y, content);
+            break;
+        }
+        case 'line': {
+            ctx.lineManager.addLine(x, y, x + 100, y);
+            break;
+        }
+        case 'rect': {
+            ctx.rectManager.addRect(x, y, 100, 50);
+            break;
+        }
+    }
+}
+
+function handleDelayer(id) {
+    console.log(id);
 }
 
 function handleRender() {
     const astString = JSON.stringify([
         {
-            id: 'SvgjsRect1000',
+            id: 'SvgjsRect1015',
             label: '背景',
             type: 'background-panel',
             attr: {
-                width: 380,
-                height: 400,
+                width: 800,
+                height: 600,
                 fill: '#ffffff',
             },
             children: [
                 {
-                    id: 'SvgjsText1001',
+                    id: 'SvgjsLine1016',
+                    label: '直线',
+                    type: 'line-panel',
+                    attr: {
+                        plot: [189, 100, 289, 100],
+                        color: '#e81616',
+                        strokeWidth: 1,
+                        strokeDasharray: '5,5',
+                        transform:
+                            'matrix(0.9656879778101767,0.25970508180028073,-0.25970508180028073,0.9656879778101767,34.171081483395625,-58.63831233128468)',
+                    },
+                    children: [],
+                },
+                {
+                    id: 'SvgjsText1017',
                     label: '文字标签',
                     type: 'text-panel',
                     attr: {
-                        x: 91,
-                        y: 94.5,
+                        x: 203,
+                        y: 354,
                         content: '文本标签',
                         fontSize: 16,
-                        fill: '#cc2f2f',
+                        fill: '#000000',
                         fontFamily: '宋体',
                         fontWeight: 'normal',
                         fontStyle: 'normal',
@@ -101,12 +138,12 @@ function handleRender() {
                     children: [],
                 },
                 {
-                    id: 'SvgjsText1002',
+                    id: 'SvgjsText1018',
                     label: '文字标签',
                     type: 'text-panel',
                     attr: {
-                        x: 155,
-                        y: 209.5,
+                        x: 420,
+                        y: 297,
                         content: '文本标签',
                         fontSize: 16,
                         fill: '#000000',
@@ -162,11 +199,26 @@ function save() {
                     >
                         文本
                     </div>
+
+                    <div
+                        draggable="true"
+                        @dragstart="($event) => onDragStart($event, 'line')"
+                    >
+                        直线
+                    </div>
+
+                    <div
+                        draggable="true"
+                        @dragstart="($event) => onDragStart($event, 'rect')"
+                    >
+                        矩形
+                    </div>
+
                     <div
                         draggable="true"
                         @dragstart="($event) => onDragStart($event, 'table')"
                     >
-                        表格
+                        业务数据
                     </div>
                 </div>
 
@@ -180,6 +232,7 @@ function save() {
                 ref="editorRef"
                 :is-toolbar="false"
                 @drag-drop="handleDragDrop"
+                @delayer="handleDelayer"
             />
         </div>
     </div>

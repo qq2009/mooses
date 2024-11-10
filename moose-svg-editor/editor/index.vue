@@ -27,7 +27,7 @@ defineProps({
     },
 });
 
-const emits = defineEmits(['dragDrop']);
+const emits = defineEmits(['dragDrop', 'delayer']);
 
 const canvas = markRaw(new SVGCanvas());
 
@@ -41,6 +41,10 @@ canvas.emitter.on(
     canvas.emitter_type.UPDATE_CANVAS_WRAPPER,
     ({ width, height }) => updateCanvasWrapper(width, height),
 );
+
+canvas.emitter.on(canvas.emitter_type.DELAYER, ({ id }) => {
+    emits('delayer', id);
+});
 
 defineExpose({
     saveCanvasText() {

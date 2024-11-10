@@ -8,6 +8,8 @@ import '@svgdotjs/svg.resize.js';
 
 import BackgroundRenderer from './drawer/background-renderer';
 import TextManager from './drawer/text-manager';
+import LineManager from './drawer/line-manager';
+import RectManager from './drawer/rect-manager';
 
 export class SVGCanvas {
     options = {
@@ -33,6 +35,16 @@ export class SVGCanvas {
      * @type {TextManager}
      * */
     textManager = null;
+
+    /**
+     * @type {LineManager}
+     * */
+    lineManager = null;
+
+    /**
+     * @type {RectManager}
+     * */
+    rectManager = null;
 
     /**
      * SVGCanvas 类构造函数
@@ -76,6 +88,8 @@ export class SVGCanvas {
                 this.emitter,
             );
             this.textManager = new TextManager(this.canvas, this.emitter);
+            this.lineManager = new LineManager(this.canvas, this.emitter);
+            this.rectManager = new RectManager(this.canvas, this.emitter);
             this.emitter.emit(EVENT_TYPE.INIT_SVGCANVAS);
 
             this.setupDragAndDrop();
@@ -114,6 +128,7 @@ export class SVGCanvas {
                 handle.target.setHeight(height);
                 handle.target.setFill(fill);
                 handle.target.setId(node.id);
+                handle.id = node.id;
                 ctx.emitter.emit(EVENT_TYPE.UPDATE_CANVAS_WRAPPER, {
                     width,
                     height,
@@ -140,9 +155,51 @@ export class SVGCanvas {
                     weight: fontWeight,
                     style: fontStyle,
                 });
+                handle.id = node.id;
                 handle.target.setId(node.id);
                 break;
             }
+
+            case DRAWER_TYPE.LINE_PANEL: {
+                const { plot, color, strokeWidth, strokeDasharray, transform } =
+                    node.attr;
+
+                const [x1, y1, x2, y2] = plot;
+                const handle = this.lineManager.addLine(x1, y1, x2, y2, {
+                    width: strokeWidth,
+                    color: color,
+                    dasharray: strokeDasharray,
+                });
+                handle.id = node.id;
+                handle.target.setId(node.id);
+                transform && handle.target.setTransform(transform);
+                break;
+            }
+
+            case DRAWER_TYPE.RECT_PANEL: {
+                const {
+                    fill,
+                    width,
+                    height,
+                    color,
+                    strokeWidth,
+                    strokeDasharray,
+                    x,
+                    y,
+                    transform,
+                } = node.attr;
+                const handle = this.rectManager.addRect(x, y, width, height, {
+                    fill: fill,
+                    color: color,
+                    width: strokeWidth,
+                    dasharray: strokeDasharray,
+                });
+                handle.id = node.id;
+                handle.target.setId(node.id);
+                transform && handle.target.setTransform(transform);
+                break;
+            }
+
             default: {
                 console.warn(`未知类型的节点: ${node.type}`);
                 break;

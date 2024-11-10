@@ -3,6 +3,8 @@ import { ref } from 'vue';
 const DRAWER_TYPE = {
     TEXT_PANEL: 'text-panel',
     BACKGROUND_PANEL: 'background-panel',
+    LINE_PANEL: 'line-panel',
+    RECT_PANEL: 'rect-panel',
 };
 
 export const layers = ref([]);
@@ -15,6 +17,7 @@ export function generateAST(layout = layers.value) {
     if (!Array.isArray(layout) || layout.length === 0) {
         return [];
     }
+
     return layout.map((node) => {
         const newNode = {
             id: node.id,
@@ -42,6 +45,30 @@ export function generateAST(layout = layers.value) {
                 fontFamily: node.target.getFontFamily(),
                 fontWeight: node.target.getWeight(),
                 fontStyle: node.target.getFontStyle(),
+            });
+        }
+
+        if (node.type === DRAWER_TYPE.LINE_PANEL) {
+            Object.assign(newNode.attr, {
+                plot: node.target.getPlot(),
+                color: node.target.getColor(),
+                strokeWidth: node.target.getStrokeWidth(),
+                strokeDasharray: node.target.getStrokeDasharray(),
+                transform: node.target.getTransform(),
+            });
+        }
+
+        if (node.type === DRAWER_TYPE.RECT_PANEL) {
+            Object.assign(newNode.attr, {
+                fill: node.target.getFill(),
+                width: node.target.getWidth(),
+                height: node.target.getHeight(),
+                color: node.target.getColor(),
+                strokeWidth: node.target.getStrokeWidth(),
+                strokeDasharray: node.target.getStrokeDasharray(),
+                x: node.target.getX(),
+                y: node.target.getY(),
+                transform: node.target.getTransform(),
             });
         }
 
