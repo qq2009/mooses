@@ -11,7 +11,7 @@ import {
     resetCanvasWrapper,
     updateCanvasWrapper,
 } from './store/canvas-wrapper';
-import { resetLayers, generateAST } from './store/layer-manager';
+import { toPageFirst, resetLayers, generateAST } from './store/layer-manager';
 import Toolbar from './view/toolbar/index.vue';
 import CanvasWrapper from './view/canvas-wrapper/index.vue';
 import SvgCanvas from './view/svg-canvas/index.vue';
@@ -48,7 +48,13 @@ canvas.emitter.on(canvas.emitter_type.DELAYER, ({ id }) => {
 
 defineExpose({
     saveCanvasText() {
-        return canvas.saveCanvasText();
+        return new Promise((resolve, reject) => {
+            toPageFirst();
+            setTimeout(() => {
+                const text = canvas.saveCanvasText();
+                resolve(text);
+            }, 1000);
+        });
     },
     render(astSting) {
         canvas.render(astSting);

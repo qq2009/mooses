@@ -1,5 +1,5 @@
 import { EVENT_TYPE } from '../emitter-type';
-import { DRAWER_TYPE } from './constant';
+import { DRAWER_TYPE, generateUUID } from './constant';
 
 /**
  * 背景绘制类
@@ -60,13 +60,20 @@ export default class BackgroundRenderer {
     /**
      * 绘制背景
      */
-    draw() {
+    draw(options = {}) {
         const { canvas, emitter } = this;
         const rect = canvas.rect('100%', '100%');
 
         rect.attr({
             fill: '#fff',
         });
+
+        if (options.id) {
+            rect.id(options.id);
+        } else {
+            const uuid = generateUUID();
+            rect.id(uuid);
+        }
 
         const handler = this.createElementHandler(rect);
 

@@ -1,13 +1,13 @@
 import { reactive } from 'vue';
 
 export function resetCanvasWrapper() {
-    canvasWrapper.width = 800;
-    canvasWrapper.height = 600;
+    canvasWrapper.width = 320;
+    canvasWrapper.height = 512;
 }
 
 export const canvasWrapper = reactive({
-    width: 800,
-    height: 600,
+    width: 320,
+    height: 512,
     // 最小画布宽
     minWrapperWidth: 1200,
     // 最小画布高

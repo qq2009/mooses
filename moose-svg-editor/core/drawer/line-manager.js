@@ -1,5 +1,5 @@
 import { EVENT_TYPE } from '../emitter-type';
-import { DRAWER_TYPE } from './constant';
+import { DRAWER_TYPE, generateUUID } from './constant';
 
 /**
  * 线绘制类
@@ -107,6 +107,13 @@ export default class LineManager {
             color: options.color || '#000000',
             dasharray: options.dasharray || '0',
         });
+
+        if (options.id) {
+            line.id(options.id);
+        } else {
+            const uuid = generateUUID();
+            line.id(uuid);
+        }
 
         line.draggable();
 

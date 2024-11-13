@@ -1,5 +1,5 @@
 import { EVENT_TYPE } from '../emitter-type';
-import { DRAWER_TYPE } from './constant';
+import { DRAWER_TYPE, generateUUID } from './constant';
 
 /**
  * 文字绘制类
@@ -52,16 +52,16 @@ export default class TextManager {
                     target.id(id);
                 },
                 getX() {
-                    return target.ax();
+                    return target.attr('x');
                 },
                 setX(x) {
-                    target.ax(x);
+                    target.attr('x', x);
                 },
                 getY() {
-                    return target.ay();
+                    return target.attr('y');
                 },
                 setY(y) {
-                    target.ay(y);
+                    target.attr('y', y);
                 },
                 getFill() {
                     return target.fill();
@@ -132,6 +132,13 @@ export default class TextManager {
                 style: options.style || 'normal',
                 family: options.family || '宋体',
             });
+
+        if (options.id) {
+            text.id(options.id);
+        } else {
+            const uuid = generateUUID();
+            text.id(uuid);
+        }
 
         text.draggable();
 

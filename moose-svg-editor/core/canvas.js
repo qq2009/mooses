@@ -13,8 +13,8 @@ import RectManager from './drawer/rect-manager';
 
 export class SVGCanvas {
     options = {
-        w: 800,
-        h: 600,
+        w: 320,
+        h: 512,
     };
 
     emitter = new Emitter();
@@ -123,12 +123,10 @@ export class SVGCanvas {
         switch (node.type) {
             case DRAWER_TYPE.BACKGROUND_PANEL: {
                 const { fill, height, width } = node.attr;
-                const handle = this.backgroundRenderer.draw();
+                const handle = this.backgroundRenderer.draw({ id: node.id });
                 handle.target.setWidth(width);
                 handle.target.setHeight(height);
                 handle.target.setFill(fill);
-                handle.target.setId(node.id);
-                handle.id = node.id;
                 ctx.emitter.emit(EVENT_TYPE.UPDATE_CANVAS_WRAPPER, {
                     width,
                     height,
@@ -154,9 +152,12 @@ export class SVGCanvas {
                     family: fontFamily,
                     weight: fontWeight,
                     style: fontStyle,
+                    id: node.id,
                 });
-                handle.id = node.id;
-                handle.target.setId(node.id);
+
+                // TODO: 创建出来的位置不对 有偏差 这里重新设置一下
+                handle.target.setX(x);
+                handle.target.setY(y);
                 break;
             }
 
@@ -169,9 +170,8 @@ export class SVGCanvas {
                     width: strokeWidth,
                     color: color,
                     dasharray: strokeDasharray,
+                    id: node.id,
                 });
-                handle.id = node.id;
-                handle.target.setId(node.id);
                 transform && handle.target.setTransform(transform);
                 break;
             }
@@ -193,9 +193,8 @@ export class SVGCanvas {
                     color: color,
                     width: strokeWidth,
                     dasharray: strokeDasharray,
+                    id: node.id,
                 });
-                handle.id = node.id;
-                handle.target.setId(node.id);
                 transform && handle.target.setTransform(transform);
                 break;
             }

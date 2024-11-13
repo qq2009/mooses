@@ -1,5 +1,5 @@
 import { EVENT_TYPE } from '../emitter-type';
-import { DRAWER_TYPE } from './constant';
+import {DRAWER_TYPE, generateUUID} from './constant';
 
 /**
  * 距形绘制类
@@ -107,7 +107,6 @@ export default class RectManager {
      * 绘制背景
      */
     addRect(x, y, w, h, options = {}) {
-        debugger;
         const { canvas, emitter } = this;
 
         const rect = canvas
@@ -121,6 +120,14 @@ export default class RectManager {
                 width: options.width || 1,
                 dasharray: options.dasharray || '0',
             });
+
+
+        if (options.id) {
+            rect.id(options.id);
+        } else {
+            const uuid = generateUUID();
+            rect.id(uuid);
+        }
 
         rect.draggable();
 

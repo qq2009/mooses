@@ -75,6 +75,7 @@ function onDragStart(event, type) {
 function handleDragDrop(opt) {
     const { ctx, x, y, options } = opt;
     const { t, content } = JSON.parse(options);
+
     switch (t) {
         case 'text': {
             ctx.textManager.addText(x, y, content);
@@ -98,86 +99,41 @@ function handleDelayer(id) {
 function handleRender() {
     const astString = JSON.stringify([
         {
-            id: 'SvgjsRect1001',
-            label: '背景',
-            type: 'background-panel',
-            attr: {
-                width: 800,
-                height: 600,
-                fill: '#ffffff',
+            "id": "SvgjsRect1000",
+            "label": "背景",
+            "type": "background-panel",
+            "attr": {
+                "width": 800,
+                "height": 600,
+                "fill": "#ffffff"
             },
-            children: [
+            "children": [
                 {
-                    id: 'SvgjsLine1002',
-                    label: '直线',
-                    type: 'line-panel',
-                    attr: {
-                        plot: [189, 100, 289, 100],
-                        color: '#e81616',
-                        strokeWidth: 1,
-                        strokeDasharray: '5,5',
-                        transform:
-                            'matrix(0.9656879778101767,0.25970508180028073,-0.25970508180028073,0.9656879778101767,34.171081483395625,-58.63831233128468)',
+                    "id": "SvgjsText1002",
+                    "label": "文字标签",
+                    "type": "text-panel",
+                    "attr": {
+                        "x": 3,
+                        "y": 17.5,
+                        "content": "文本标签",
+                        "fontSize": 16,
+                        "fill": "#000000",
+                        "fontFamily": "宋体",
+                        "fontWeight": "normal",
+                        "fontStyle": "normal"
                     },
-                    children: [],
-                },
-                {
-                    id: 'SvgjsText1003',
-                    label: '文字标签',
-                    type: 'text-panel',
-                    attr: {
-                        x: 203,
-                        y: 379,
-                        content: '文本标签',
-                        fontSize: 16,
-                        fill: '#000000',
-                        fontFamily: '宋体',
-                        fontWeight: 'normal',
-                        fontStyle: 'normal',
-                    },
-                    children: [],
-                },
-                {
-                    id: 'SvgjsText1004',
-                    label: '文字标签',
-                    type: 'text-panel',
-                    attr: {
-                        x: 420,
-                        y: 322,
-                        content: '文本标签',
-                        fontSize: 16,
-                        fill: '#000000',
-                        fontFamily: '宋体',
-                        fontWeight: 'normal',
-                        fontStyle: 'normal',
-                    },
-                    children: [],
-                },
-                {
-                    id: 'SvgjsRect1005',
-                    label: '距形',
-                    type: 'rect-panel',
-                    attr: {
-                        fill: '#ffffff',
-                        width: 100,
-                        height: 50,
-                        color: '#000000',
-                        strokeWidth: 1,
-                        strokeDasharray: 0,
-                        x: 72,
-                        y: 59,
-                    },
-                    children: [],
-                },
-            ],
-        },
+                    "children": []
+                }
+            ]
+        }
     ]);
 
     editorRef.value.render(astString);
 }
 
-function save() {
-    const ast = editorRef.value.generateAST();
+async function save() {
+
+    const ast =await editorRef.value.saveCanvasText();
     console.log(ast);
 }
 </script>

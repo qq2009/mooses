@@ -26,6 +26,7 @@ let offsetY = 0;
 // 偏移计算
 function computedOffset() {
     const { w, h } = getWH();
+
     const scaledWidth = w * 1.5;
     const scaledHeight = h * 1.5;
 
@@ -125,6 +126,9 @@ function getWH() {
 onMounted(() => {
     setTimeout(() => {
         const { w, h } = getWH();
+
+        computedOffset();
+
         svgX = SVG()
             .addTo(rulerXRef.value)
             .size(w * 2, 20);
@@ -132,7 +136,6 @@ onMounted(() => {
             .addTo(rulerYRef.value)
             .size(20, h * 2);
 
-        computedOffset();
         drawRulerX();
         drawRulerY();
         centerCanvas();
@@ -146,6 +149,7 @@ watch(
         nextTick(() => {
             const { w, h } = getWH();
             computedOffset();
+
             drawRulerX();
             drawRulerY();
             centerCanvas();

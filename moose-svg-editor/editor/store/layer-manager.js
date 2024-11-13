@@ -13,6 +13,11 @@ export function resetLayers() {
     layers.value = [];
 }
 
+export function toPageFirst() {
+    const [A] = layers.value;
+    A.target.select();
+}
+
 export function generateAST(layout = layers.value) {
     if (!Array.isArray(layout) || layout.length === 0) {
         return [];

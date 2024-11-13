@@ -22,9 +22,9 @@ const props = defineProps({
 });
 
 const sizes = [
+    { label: '320*512' },
     { label: '380*400' },
-    { label: '800*600' },
-    { label: '1920*1080' },
+    { label: '2752*56' },
 ];
 
 const attr = reactive({
