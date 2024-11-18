@@ -9,3 +9,5 @@ packages:
   - 'moose-theme/**'
   - 'moose-directive/**'
   - 'moose-svg-editor/**'
+  - 'moose-video-client/**'
+  - 'moose-xlsx/**'

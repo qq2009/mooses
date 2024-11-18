@@ -1,6 +1,5 @@
 <script setup>
 import { ref, watch, onMounted, nextTick } from 'vue';
-import { ElSelect, ElOption } from 'element-plus';
 import { canvasWrapper } from '../../store/canvas-wrapper';
 import { SVG } from '@svgdotjs/svg.js';
 
@@ -65,16 +64,25 @@ function drawRulerX() {
     const spacing = Math.max(minSpacing, 10 * zoomLevel.value);
     const rulerWidth = w * 2;
 
-    // 从 offsetX 偏移处开始绘制
-    for (let i = -offsetX; i < rulerWidth - offsetX; i += spacing) {
-        const label = (i / zoomLevel.value).toFixed(0);
-        svgX.line(i + offsetX, 0, i + offsetX, 10).stroke({
+    // 确定每个标签的间隔（50 为标签间隔的基准）
+    const labelInterval = 50 * zoomLevel.value;
+    let startPosition = Math.floor(-offsetX / labelInterval) * labelInterval;
+    for (let i = startPosition; i < rulerWidth - offsetX; i += spacing) {
+        const labelValue = (i / zoomLevel.value).toFixed(0);
+
+        // 判断是否是带标签的位置
+        const isLabelPosition = i % labelInterval === 0;
+        const lineLength = isLabelPosition ? 20 : 10; // 标签刻度线更长
+
+        // 绘制刻度线
+        svgX.line(i + offsetX, 0, i + offsetX, lineLength).stroke({
             color: '#000',
             width: 1,
         });
 
-        if (i % (50 * zoomLevel.value) === 0) {
-            svgX.text(label)
+        // 仅在整数倍的位置绘制标签
+        if (isLabelPosition) {
+            svgX.text(labelValue)
                 .move(i + offsetX + 2, 8)
                 .font({ size: 8 });
         }
@@ -88,18 +96,39 @@ function drawRulerY() {
     const spacing = Math.max(minSpacing, 10 * zoomLevel.value);
     const rulerHeight = h * 2;
 
-    // 从 offsetY 偏移处开始绘制
-    for (let i = -offsetY; i < rulerHeight - offsetY; i += spacing) {
-        const label = (i / zoomLevel.value).toFixed(0);
+    // 确定每个标签的间隔（50 为标签间隔的基准）
+    const labelInterval = 50 * zoomLevel.value;
 
-        svgY.line(0, i + offsetY, 10, i + offsetY).stroke({
+    let startPosition = Math.floor(-offsetY / labelInterval) * labelInterval;
+
+    // 从起始位置开始绘制
+    for (let i = startPosition; i < rulerHeight - offsetY; i += spacing) {
+        const labelValue = (i / zoomLevel.value).toFixed(0);
+
+        // 判断是否是带标签的位置
+        const isLabelPosition = i % labelInterval === 0;
+        const lineLength = isLabelPosition ? 20 : 10;
+
+        // 绘制刻度线
+        svgY.line(0, i + offsetY, lineLength, i + offsetY).stroke({
             color: '#000',
             width: 1,
         });
 
-        if (i % (50 * zoomLevel.value) === 0) {
-            svgY.text(label)
-                .move(8, i + offsetY + 2)
+        // 绘制标签
+        if (isLabelPosition) {
+            let xOffset = 8;
+            let yOffset = i + offsetY + 4;
+
+            // TODO：算法待优化
+            if (['0'].includes(labelValue)) {
+                xOffset = 14;
+            } else if (['-50', '50'].includes(labelValue)) {
+                xOffset = 12;
+            }
+
+            svgY.text(labelValue)
+                .move(xOffset, yOffset)
                 .font({ size: 8 })
                 .rotate(90);
         }
@@ -131,10 +160,10 @@ onMounted(() => {
 
         svgX = SVG()
             .addTo(rulerXRef.value)
-            .size(w * 2, 20);
+            .size(w * 2, 24);
         svgY = SVG()
             .addTo(rulerYRef.value)
-            .size(20, h * 2);
+            .size(24, h * 2);
 
         drawRulerX();
         drawRulerY();
@@ -154,8 +183,8 @@ watch(
             drawRulerY();
             centerCanvas();
 
-            svgX.size(w * 2, 20);
-            svgY.size(20, h * 2);
+            svgX.size(w * 2, 24);
+            svgY.size(24, h * 2);
             handleScroll();
         });
     },
@@ -190,8 +219,8 @@ watch(zoomLevel, () => {
     position: relative;
 
     display: grid;
-    grid-template-columns: 20px 1fr;
-    grid-template-rows: 20px 1fr;
+    grid-template-columns: 24px 1fr;
+    grid-template-rows: 24px 1fr;
 }
 
 .ruler_corner {
@@ -207,7 +236,7 @@ watch(zoomLevel, () => {
     grid-column: 2 / 3;
     background-color: #ececee;
     overflow: hidden;
-    height: 20px;
+    height: 24px;
     width: 100%;
     pointer-events: none;
     user-select: none;
@@ -218,7 +247,7 @@ watch(zoomLevel, () => {
     grid-column: 1 / 2;
     background-color: #ececee;
     overflow: hidden;
-    width: 20px;
+    width: 24px;
     height: 100%;
     pointer-events: none;
     user-select: none;

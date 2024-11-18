@@ -1,0 +1,14 @@
+{
+    "name": "@mooses/video-client",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "author": "Gsothing",
+    "keywords": ["视频客户端"],
+    "license": "ISC",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

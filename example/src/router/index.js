@@ -39,6 +39,11 @@ const routes = [
         name: 'svg-editor',
         component: () => import('@/views/svg-editor/index.vue'),
     },
+    {
+        path: '/video-client',
+        name: 'video-client',
+        component: () => import('@/views/video-client/index.vue'),
+    },
 ];
 
 export const router = createRouter({

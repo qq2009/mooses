@@ -1,0 +1,19 @@
+{
+    "name": "@mooses/xlsx",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "author": "Gsothing",
+    "keywords": [
+        "表格解析", "表格模板"
+    ],
+    "license": "ISC",
+    "dependencies": {
+        "jszip": "^3.10.1"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

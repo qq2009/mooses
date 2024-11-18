@@ -15,7 +15,9 @@
         "@mooses/utils": "workspace:^",
         "@mooses/theme": "workspace:^",
         "@mooses/directive": "workspace:^",
-        "@mooses/svg-editor": "workspace:^"
+        "@mooses/svg-editor": "workspace:^",
+        "@mooses/video-client": "workspace:^",
+        "@mooses/xlsx": "workspace:^"
     },
     "devDependencies": {
         "prettier": "^3.0.3"

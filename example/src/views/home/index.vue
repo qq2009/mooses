@@ -30,6 +30,11 @@ const list = ref([
         docs: 'svg 编辑器',
         path: '/svg-editor',
     },
+    {
+        name: 'video-client',
+        docs: '视频客户端',
+        path: '/video-client',
+    },
 ]);
 
 function handle(path) {
