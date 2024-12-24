@@ -13,5 +13,3 @@ const app = createApp(App);
 
 app.use(ElementPlus).use(Router);
 app.mount('#app');
-
-await wait();
