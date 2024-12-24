@@ -8,13 +8,13 @@ const editorRef = ref(null);
 const dynamicDialog = useDynamicDialogMethod();
 
 const formData = ref({
-    a1: '指挥中心LED屏1',
+    a1: 'LED屏1',
     a2: '',
 });
 
 const data = [
     {
-        label: 'AB门系统',
+        label: '门禁系统',
         children: [
             {
                 label: '${外来人员}',
@@ -27,18 +27,14 @@ const data = [
         ],
     },
     {
-        label: '罪犯统计',
+        label: '员工统计',
         children: [
             {
-                label: '${在册罪犯}',
+                label: '${在册员工}',
                 value: 3,
             },
             {
-                label: '${在押罪犯}',
-                value: 4,
-            },
-            {
-                label: '${严管罪犯}',
+                label: '${离职员工}',
                 value: 5,
             },
         ],

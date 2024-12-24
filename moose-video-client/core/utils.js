@@ -56,29 +56,37 @@ function detectBrowser() {
             return {
                 x: 12,
                 y: 12,
-                maximizedX: 5,
-                maximizedY: 4
+                mX: 5,
+                mY: 4,
+                fX: -8,
+                fY: -8
             };
         case 'Firefox':
             return {
                 x: 6,
                 y: 6,
-                maximizedX: 8,
-                maximizedY: 8
+                mX: 8,
+                mY: 8,
+                fX: 0,
+                fY: 0
             };
         case 'Chrome':
             return {
                 x: 8,
                 y: 8,
-                maximizedX: 0,
-                maximizedY: 0
+                mX: 0,
+                mY: 0,
+                fX: -8,
+                fY: -8
             };
         default:
             return {
                 x: 0,
                 y: 0,
-                maximizedX: 0,
-                maximizedY: 0
+                mX: 0,
+                mY: 0,
+                fX: 0,
+                fY: 0
             };
     }
 }
@@ -99,6 +107,10 @@ export function debounce(func, delay) {
     };
 }
 
+function hasFullScreen() {
+    return (window.screen.width === window.innerWidth && window.screen.height === window.innerHeight);
+}
+
 export function getElementResizeAndPositionParams(element) {
     const elementRect = element.getBoundingClientRect();
     // 获取浏览器窗口相对于屏幕的位置
@@ -110,9 +122,13 @@ export function getElementResizeAndPositionParams(element) {
 
     const detect = detectBrowser()
 
-    // 浏览器窗口化内缩的边界调整
-    const borderAdjustmentX = !isBrowserMaximized() ? detect.x : detect.maximizedX;
-    const borderAdjustmentY = !isBrowserMaximized() ? detect.y : detect.maximizedY;
+    let borderAdjustmentX = !isBrowserMaximized() ? detect.x : detect.mX;
+    let borderAdjustmentY = !isBrowserMaximized() ? detect.y : detect.mY;
+
+    if (hasFullScreen()) {
+        borderAdjustmentX = detect.fX;
+        borderAdjustmentY = detect.fY;
+    }
 
     const screenLeft = elementRect.left + browserWindowX + borderAdjustmentX;
     const screenTop = elementRect.top + browserWindowY + browserToolbarHeight - borderAdjustmentY;

@@ -6,6 +6,11 @@ const router = useRouter();
 
 const list = ref([
     {
+        name: '常用模版',
+        docs: '常用模版',
+        path: '/template',
+    },
+    {
         name: '拖拽',
         docs: '拖拽，支持边界限制、吸附、栅格对齐、速度控制及拖拽回调',
         path: '/drag',
@@ -17,7 +22,7 @@ const list = ref([
     },
     {
         name: 'dynamic',
-        docs: '',
+        docs: '动态组件',
         path: '/dynamic',
     },
     {
@@ -45,7 +50,7 @@ function handle(path) {
 <template>
     <nav class="navbar bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
+<!--            <a class="navbar-brand" href="#">Navbar</a>-->
             <h1 class="navbar-title">Mooses</h1>
         </div>
     </nav>
@@ -54,12 +59,8 @@ function handle(path) {
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Album example</h1>
                     <p class="lead text-body-secondary">
-                        Something short and leading about the collection
-                        below—its contents, the creator, etc. Make it short and
-                        sweet, but not too short so folks don’t simply skip over
-                        it entirely.
+                        Standing on the shoulders of giants.
                     </p>
                 </div>
             </div>
@@ -111,14 +112,14 @@ function handle(path) {
         </div>
     </main>
 
-    <footer class="text-body-secondary py-5">
-        <div class="container">
-            <p class="mb-1">
-                Album example is © Bootstrap, but please download and customize
-                it for yourself!
-            </p>
-        </div>
-    </footer>
+<!--    <footer class="text-body-secondary py-5">-->
+<!--        <div class="container">-->
+<!--            <p class="mb-1">-->
+<!--                Album example is © Bootstrap, but please download and customize-->
+<!--                it for yourself!-->
+<!--            </p>-->
+<!--        </div>-->
+<!--    </footer>-->
 </template>
 
 <style lang="scss" scoped>

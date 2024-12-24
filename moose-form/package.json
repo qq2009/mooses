@@ -6,7 +6,8 @@
     "main": "index.js",
     "author": "Gsothing",
     "keywords": [
-        "表单"
+        "表单",
+        "自定义表单"
     ],
     "license": "ISC",
     "dependencies": {

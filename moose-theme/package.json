@@ -1,7 +1,7 @@
 {
     "name": "@mooses/theme",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "开发常用样式",
     "author": "Gsothing",
     "keywords": [

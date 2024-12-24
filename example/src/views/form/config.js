@@ -8,13 +8,13 @@ export const options = defineFormColumns([
         span: 12,
         prop: 'a1',
         placeholder: '请输入姓名',
-        rules: [
-            {
-                required: true,
-                message: 'Please input Activity name',
-                trigger: 'blur',
-            },
-        ],
+        // rules: [
+        //     {
+        //         required: true,
+        //         message: 'Please input Activity name',
+        //         trigger: 'blur',
+        //     },
+        // ],
     },
     {
         type: 'input-number',

@@ -1,7 +1,11 @@
 interface FormBaseConfig {
+    // 标签
     label: string;
+    // 标签位置
     span: number;
+    // 字段
     field: string;
+    // 默认值
     defaultValue: any;
 }
 
@@ -89,3 +93,5 @@ type FormConfig =
     | FormRadioConfig
     | FormDatePickerConfig
     | FormColorPickerConfig;
+
+export function defineFormColumns(columns: FormConfig[]): FormConfig[];

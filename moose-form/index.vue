@@ -1,5 +1,5 @@
 <script setup>
-import { defineComponent, ref, computed, defineExpose } from 'vue';
+import { defineComponent, ref, computed, defineExpose, defineProps } from 'vue';
 import { ElForm, ElRow, ElCol } from 'element-plus';
 import { DLL } from './config';
 
@@ -34,7 +34,7 @@ const formRef = ref(null);
 // 表单数据
 const form = ref({});
 
-// 计算属性，确保options始终为数组类型
+// 确保options始终为数组类型
 const formOptions = computed(() => formOptionsProp || []);
 
 // 根据类型获取对应的组件
@@ -46,14 +46,14 @@ const getSpan = (column) => column.span || span;
 // 处理组件更新事件，更新表单数据模型
 const handleUpdate = (newValue) => {
     Object.keys(newValue).forEach((key) => {
-        // 保留这个判断可以确保不会向form.value添加不必要的属性
+        // 保留这个判断用来确保不会向form.value添加不必要的属性
         // if (form.value.hasOwnProperty(key)) {
         form.value[key] = newValue[key];
         // }
     });
 };
 
-// 表单验证方法，返回Promise以便于异步处理验证结果
+// 表单验证方法，返回Promise异步处理验证结果
 function validate() {
     return new Promise((resolve, reject) => {
         formRef.value.validate((valid) => {
@@ -81,7 +81,7 @@ defineExpose({
                         :is="getComponentType(column.type)"
                         v-bind="column"
                         @update="handleUpdate"
-                    ></component>
+                    />
                 </ElCol>
             </template>
         </ElRow>
