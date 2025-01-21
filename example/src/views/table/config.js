@@ -1,6 +1,5 @@
 import { ref } from 'vue';
 import { defineTableColumns } from '@mooses/table';
-
 export const columnsA = defineTableColumns([
     {
         label: 'Name',

@@ -40,6 +40,11 @@ const list = ref([
         docs: '视频客户端',
         path: '/video-client',
     },
+    {
+        name: 'cond-table',
+        docs: '条件表格',
+        path: '/cond-table',
+    },
 ]);
 
 function handle(path) {

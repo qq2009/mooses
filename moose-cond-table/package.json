@@ -1,18 +1,18 @@
 {
-    "name": "@mooses/form",
+    "name": "@mooses/cond-table",
     "type": "module",
     "version": "0.0.3",
     "description": "",
     "main": "index.js",
     "author": "Gsothing",
-    "keywords": [
-        "表单",
-        "自定义表单"
-    ],
+    "keywords": [],
     "license": "ISC",
     "dependencies": {
-        "vue": "^3.4.19",
-        "element-plus": "^2.8.0"
+        "@mooses/form": "*",
+        "@mooses/table": "*",
+        "@vueuse/core": "^12.4.0",
+        "element-plus": "^2.8.0",
+        "vue": "^3.4.19"
     },
     "publishConfig": {
         "registry": "https://registry.npmjs.org/",

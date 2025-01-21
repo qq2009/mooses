@@ -20,6 +20,11 @@ const routes = [
         component: () => import('@/views/table/index.vue'),
     },
     {
+        path: '/cond-table',
+        name: 'CondTable',
+        component: () => import('@/views/cond-table/index.vue'),
+    },
+    {
         path: '/form',
         name: 'Form',
         component: () => import('@/views/form/index.vue'),

@@ -12,6 +12,7 @@
         "@mooses/emitter": "workspace:^",
         "@mooses/form": "workspace:^",
         "@mooses/table": "workspace:^",
+        "@mooses/cond-table": "workspace:^",
         "@mooses/utils": "workspace:^",
         "@mooses/theme": "workspace:^",
         "@mooses/directive": "workspace:^",

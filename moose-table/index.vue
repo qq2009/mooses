@@ -1,6 +1,8 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, useSlots } from 'vue';
 import { ElTable, ElTableColumn } from 'element-plus';
+
+const slots = useSlots();
 
 const props = defineProps({
     /**
@@ -20,14 +22,25 @@ const props = defineProps({
     height: {
         type: [String, Number],
     },
+    slots: {
+        type: Object,
+        default: () => ({}),
+    },
 });
+
+const mergeSlots = {
+    ...slots,
+    ...props.slots,
+};
+
+console.log(mergeSlots);
 </script>
 
 <template>
     <ElTable :data="source" :height="height">
         <template v-for="column in columns" :key="column.name">
             <template v-if="column.slot">
-                <slot :name="column.slot"></slot>
+                <component :is="mergeSlots[column.slot]" />
             </template>
             <template v-else>
                 <ElTableColumn v-bind="column" />

@@ -5,6 +5,7 @@ packages:
   - 'moose-emitter/**'
   - 'moose-form/**'
   - 'moose-table/**'
+  - 'moose-cond-table/**'
   - 'moose-utils/**'
   - 'moose-theme/**'
   - 'moose-directive/**'

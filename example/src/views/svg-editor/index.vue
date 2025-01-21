@@ -19,8 +19,8 @@ function handleOpen() {
 
 <template>
     <div class="svg-editor">
-        <button @click="handleOpen">Open</button>
-        <!--        <MSvgEditor />-->
+        <!--        <button @click="handleOpen">Open</button>-->
+        <MSvgEditor />
     </div>
 </template>
 

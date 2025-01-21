@@ -1,15 +1,15 @@
 import '@mooses/theme/reset-pc.css';
 import '@mooses/theme/bootstrap-grid.css';
 import 'element-plus/dist/index.css';
-import { wait } from "@mooses/utils/index"
-import "@mooses/video-client/index";
+import '@mooses/video-client/index';
 
 import { createApp } from 'vue';
 import ElementPlus from 'element-plus';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import App from '@/App.vue';
 
 import Router from '@/router';
 const app = createApp(App);
 
-app.use(ElementPlus).use(Router);
+app.use(ElementPlus,{ locale: zhCn }).use(Router);
 app.mount('#app');
