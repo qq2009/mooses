@@ -19,7 +19,7 @@ const props = defineProps({
     // 栅格间隔
     gutter: {
         type: Number,
-        default: 20,
+        default: 0,
     },
     // 栅格占据的列数
     span: {

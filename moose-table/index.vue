@@ -13,7 +13,7 @@ const props = defineProps({
         default: () => [],
     },
     /**
-     * @type ColumnConfig[]
+     * @type TableColumnsConfig[]
      * */
     columns: {
         type: Array,

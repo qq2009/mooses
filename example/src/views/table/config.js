@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { defineTableColumns } from '@mooses/table';
 export const columnsA = defineTableColumns([
     {
+        type: 'index',
         label: 'Name',
         prop: 'name',
     },

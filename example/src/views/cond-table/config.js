@@ -16,7 +16,7 @@ export const columnsA = defineTableColumns([
     },
     {
         slot: 'operate',
-    }
+    },
 ]);
 
 export const datum = ref([
@@ -207,5 +207,5 @@ export const options = defineFormColumns([
                 value: 2,
             },
         ],
-    }
+    },
 ]);
