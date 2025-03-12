@@ -1,5 +1,8 @@
 import type { VNode } from 'vue';
 import type { TableColumnCtx } from 'element-plus/es/components/table';
+import Table from "./index.vue";
+
+export declare const MTable: InstanceType<typeof Table>;
 
 // 定义格式化函数类型
 type FormatterMethod<T> = (

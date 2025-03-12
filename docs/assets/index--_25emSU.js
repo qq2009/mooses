@@ -1,0 +1,1 @@
+import{aA as s,aB as n,c,h as r,t as l,a as u,o as p}from"./index-By6WQf-7.js";const i={class:"test"},f={__name:"index",props:{name:{type:String,default:""}},setup(t){const a=t,e=s({count:1});n(()=>a.name);const o=()=>{e.value={count:222}};return(d,_)=>(p(),c("div",i,[r(l(e.value.count)+" ",1),u("button",{onClick:o},"调整")]))}};export{f as default};

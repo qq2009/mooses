@@ -1,0 +1,23 @@
+{
+    "name": "@mooses/dynamic-dialog",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "轻松动态加载、卸载组件，支持灵活渲染和生命周期管理。",
+    "main": "index.js",
+    "dependencies": {
+        "vue": "^3.4.19",
+        "@mooses/dynamic": "^0.0.1",
+        "element-plus": "^2.8.0"
+    },
+    "author": "Gsothing",
+    "keywords": [
+        "动态加载",
+        "组件卸载",
+        "灵活渲染"
+    ],
+    "license": "ISC",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    }
+}

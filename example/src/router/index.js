@@ -54,6 +54,11 @@ const routes = [
         name: 'video-client',
         component: () => import('@/views/video-client/index.vue'),
     },
+    {
+        path: '/test',
+        name: 'Test',
+        component: () => import('@/views/test/index.vue'),
+    },
 ];
 
 export const router = createRouter({

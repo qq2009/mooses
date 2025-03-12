@@ -2,6 +2,8 @@ packages:
   - 'example/**'
   - 'moose-drag/**'
   - 'moose-dynamic/**'
+  - 'moose-dynamic-dialog/**'
+  - 'moose-dynamic-drawer/**'
   - 'moose-emitter/**'
   - 'moose-form/**'
   - 'moose-table/**'

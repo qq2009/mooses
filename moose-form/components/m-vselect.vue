@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watch, defineEmits, onMounted } from 'vue';
-import { ElFormItem, ElSelectV2, ElOption } from 'element-plus';
+import { ref, watch } from 'vue';
+import { ElFormItem, ElSelectV2 } from 'element-plus';
 
 const props = defineProps({
     field: {
@@ -20,7 +20,7 @@ const props = defineProps({
 const { field, defaultValue, options } = props;
 const emits = defineEmits(['update']);
 
-const value = ref(props.defaultValue);
+const value = ref(defaultValue);
 const optionList = ref([]);
 
 const loadOptions = async () => {
@@ -29,7 +29,7 @@ const loadOptions = async () => {
     } else if (Array.isArray(options)) {
         optionList.value = options;
     } else {
-        console.warn('MSelect Invalid options format');
+        console.warn('MVselect Invalid options format');
     }
 };
 
@@ -38,7 +38,7 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+    emits('update', { [field]: val });
 }
 
 loadOptions();

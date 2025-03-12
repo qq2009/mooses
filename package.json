@@ -9,6 +9,8 @@
     "dependencies": {
         "@mooses/drag": "workspace:^",
         "@mooses/dynamic": "workspace:^",
+        "@mooses/dynamic-dialog": "workspace:^",
+        "@mooses/dynamic-drawer": "workspace:^",
         "@mooses/emitter": "workspace:^",
         "@mooses/form": "workspace:^",
         "@mooses/table": "workspace:^",

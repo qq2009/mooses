@@ -6,7 +6,7 @@ const visible = ref(true);
 </script>
 
 <template>
-    <ElDialog v-model="visible" v-bind="$attrs">
+    <ElDialog class="moose-dynamic-dialog" v-model="visible" v-bind="$attrs">
         <slot></slot>
     </ElDialog>
 </template>

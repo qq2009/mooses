@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineEmits, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 import { ElFormItem, ElSelect, ElOption } from 'element-plus';
 
 const props = defineProps({
@@ -20,7 +20,7 @@ const props = defineProps({
 const { field, defaultValue, options } = props;
 const emits = defineEmits(['update']);
 
-const value = ref(props.defaultValue);
+const value = ref(defaultValue);
 const optionList = ref([]);
 
 const loadOptions = async () => {
@@ -38,7 +38,7 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+    emits('update', { [field]: val });
 }
 
 loadOptions();

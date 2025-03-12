@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineEmits } from 'vue';
+import { ref, watch } from 'vue';
 import { ElFormItem, ElColorPicker } from 'element-plus';
 
 const props = defineProps({
@@ -22,7 +22,7 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val) {
-    emits('update', { [props.field]: val || defaultValue });
+    emits('update', { [field]: val || defaultValue });
 }
 
 handleUpdate();

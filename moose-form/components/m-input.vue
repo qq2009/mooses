@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineEmits } from 'vue';
+import { ref, watch } from 'vue';
 import { ElFormItem, ElInput } from 'element-plus';
 
 const props = defineProps({
@@ -14,6 +14,7 @@ const props = defineProps({
 });
 
 const { field, defaultValue } = props;
+
 const emits = defineEmits(['update']);
 const value = ref(defaultValue);
 
@@ -22,9 +23,8 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+    emits('update', { [field]: val });
 }
-
 handleUpdate();
 </script>
 

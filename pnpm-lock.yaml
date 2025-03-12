@@ -20,6 +20,12 @@ importers:
       '@mooses/dynamic':
         specifier: workspace:^
         version: link:moose-dynamic
+      '@mooses/dynamic-dialog':
+        specifier: workspace:^
+        version: link:moose-dynamic-dialog
+      '@mooses/dynamic-drawer':
+        specifier: workspace:^
+        version: link:moose-dynamic-drawer
       '@mooses/emitter':
         specifier: workspace:^
         version: link:moose-emitter
@@ -74,10 +80,10 @@ importers:
   moose-cond-table:
     dependencies:
       '@mooses/form':
-        specifier: ^0.0.2
+        specifier: '*'
         version: link:../moose-form
       '@mooses/table':
-        specifier: ^0.0.1
+        specifier: '*'
         version: link:../moose-table
       '@vueuse/core':
         specifier: ^12.4.0
@@ -102,6 +108,30 @@ importers:
       vue:
         specifier: ^3.4.19
         version: 3.5.12
+
+  moose-dynamic-dialog:
+    dependencies:
+      '@mooses/dynamic':
+        specifier: ^0.0.1
+        version: link:../moose-dynamic
+      element-plus:
+        specifier: ^2.8.0
+        version: 2.8.5(vue@3.5.13)
+      vue:
+        specifier: ^3.4.19
+        version: 3.5.13
+
+  moose-dynamic-drawer:
+    dependencies:
+      '@mooses/dynamic':
+        specifier: ^0.0.1
+        version: link:../moose-dynamic
+      element-plus:
+        specifier: ^2.8.0
+        version: 2.8.5(vue@3.5.13)
+      vue:
+        specifier: ^3.4.19
+        version: 3.5.13
 
   moose-emitter: {}
 
@@ -195,6 +225,14 @@ packages:
       vue: ^3.2.0
     dependencies:
       vue: 3.5.12
+    dev: false
+
+  /@element-plus/icons-vue@2.3.1(vue@3.5.13):
+    resolution: {integrity: sha512-XxVUZv48RZAd87ucGS48jPf6pKu0yV5UCg9f4FFwtrYxXOwWuVJo6wOvSLKEoMQKjv8GsX/mhP6UsC1lRwbUWg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.5.13
     dev: false
 
   /@esbuild/aix-ppc64@0.21.5:
@@ -918,6 +956,18 @@ packages:
       - vue
     dev: false
 
+  /@vueuse/core@9.13.0(vue@3.5.13):
+    resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.16
+      '@vueuse/metadata': 9.13.0
+      '@vueuse/shared': 9.13.0(vue@3.5.13)
+      vue-demi: 0.14.10(vue@3.5.13)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
   /@vueuse/metadata@12.4.0:
     resolution: {integrity: sha512-AhPuHs/qtYrKHUlEoNO6zCXufu8OgbR8S/n2oMw1OQuBQJ3+HOLQ+EpvXs+feOlZMa0p8QVvDWNlmcJJY8rW2g==}
     dev: false
@@ -938,6 +988,15 @@ packages:
     resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
       vue-demi: 0.14.10(vue@3.5.12)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/shared@9.13.0(vue@3.5.13):
+    resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
+    dependencies:
+      vue-demi: 0.14.10(vue@3.5.13)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -999,6 +1058,31 @@ packages:
       memoize-one: 6.0.0
       normalize-wheel-es: 1.2.0
       vue: 3.5.12
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
+
+  /element-plus@2.8.5(vue@3.5.13):
+    resolution: {integrity: sha512-Px+kPbRTVvn5oa5+9saa7QEOnUweKXm0JVI7yJHzKF/doQGixwcFMsQEF2+3Fy62EA/7dRRKVuhsNGGZYNk3cw==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@element-plus/icons-vue': 2.3.1(vue@3.5.13)
+      '@floating-ui/dom': 1.6.11
+      '@popperjs/core': /@sxzz/popperjs-es@2.11.7
+      '@types/lodash': 4.17.10
+      '@types/lodash-es': 4.17.12
+      '@vueuse/core': 9.13.0(vue@3.5.13)
+      async-validator: 4.2.5
+      dayjs: 1.11.13
+      escape-html: 1.0.3
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3(@types/lodash-es@4.17.12)(lodash-es@4.17.21)(lodash@4.17.21)
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.5.13
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
@@ -1342,6 +1426,21 @@ packages:
         optional: true
     dependencies:
       vue: 3.5.12
+    dev: false
+
+  /vue-demi@0.14.10(vue@3.5.13):
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.5.13
     dev: false
 
   /vue-router@4.4.5(vue@3.5.12):

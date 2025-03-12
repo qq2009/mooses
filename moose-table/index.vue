@@ -32,13 +32,11 @@ const mergeSlots = {
     ...slots,
     ...props.slots,
 };
-
-console.log(mergeSlots);
 </script>
 
 <template>
     <ElTable :data="source" :height="height">
-        <template v-for="column in columns" :key="column.name">
+        <template v-for="column in columns" :key="column.label">
             <template v-if="column.slot">
                 <component :is="mergeSlots[column.slot]" />
             </template>

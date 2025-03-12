@@ -11,5 +11,13 @@ import App from '@/App.vue';
 import Router from '@/router';
 const app = createApp(App);
 
-app.use(ElementPlus,{ locale: zhCn }).use(Router);
+app.use(ElementPlus, { locale: zhCn }).use(Router);
 app.mount('#app');
+
+localStorage.setItem('token','1111');
+// 监听刷新关闭都可以
+window.onbeforeunload = (event) => {
+    const token = localStorage.getItem('token');
+    debugger;
+    fetch('http://localhost:3000/test',{ method: 'POST' });
+}

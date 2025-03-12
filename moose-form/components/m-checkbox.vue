@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineEmits } from 'vue';
+import { ref, watch } from 'vue';
 import { ElFormItem, ElCheckboxGroup, ElCheckbox } from 'element-plus';
 
 const props = defineProps({
@@ -46,7 +46,7 @@ watch(value, (val) => {
 });
 
 function handleUpdate(val = value.value) {
-    emits('update', { [props.field]: val });
+    emits('update', { [field]: val });
 }
 
 loadOptions();

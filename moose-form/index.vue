@@ -1,5 +1,5 @@
 <script setup>
-import { defineComponent, ref, computed, defineExpose, defineProps } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import { ElForm, ElRow, ElCol } from 'element-plus';
 import { DLL } from './config';
 
@@ -16,12 +16,26 @@ const props = defineProps({
         type: Array,
         required: true,
     },
-    // 栅格间隔
+    /**
+     * 表单回填对象
+     * @type { Object }
+     * */
+    backfill: {
+        type: Object,
+        default: () => ({}),
+    },
+    /**
+     * 栅格间隔
+     * @type { Number }
+     * */
     gutter: {
         type: Number,
-        default: 0,
+        default: 20,
     },
-    // 栅格占据的列数
+    /**
+     * 栅格占据的列数
+     * @type { Number }
+     * */
     span: {
         type: Number,
         default: 24,
